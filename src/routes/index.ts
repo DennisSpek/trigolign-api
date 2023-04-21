@@ -8,4 +8,7 @@ const autoDataRoutes = require('./autodata');
 // Define routes
 router.use('/autodata', autoDataRoutes);
 
+// User routes
+router.use('/autodata', autoDataRoutes);
+
 module.exports = router;

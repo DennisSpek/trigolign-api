@@ -1,0 +1,3 @@
+- Include API key
+- Protect routes
+- Search car based on Model

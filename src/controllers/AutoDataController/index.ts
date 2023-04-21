@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Constants
 const API_URL = 'https://api.autodata-group.com/docs/v1/vehicles';
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.API_KEY_AUTODATA;
 const ACCEPT_LANGUAGE = 'en-gb;q=0.8,en;q=0.7,fr-fr;q=0.4';
 const COUNTRY_CODE = 'gb';
 const PAGE_LIMIT = 20;
