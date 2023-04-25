@@ -1,3 +1,6 @@
 - Include API key
 - Protect routes
 - Search car based on Model
+
+- 1st Call returns Car details(Model, merk, ect + MID)
+- Combine 1st call + second call
