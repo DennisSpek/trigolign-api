@@ -1,5 +1,5 @@
 import express, {Express, Request, Response} from 'express';
-import { dataSource } from "./database/data-source"
+import { DatabaseAdapter } from "./database/adapter"
 
 import * as dotenv from 'dotenv' 
 dotenv.config();
@@ -10,10 +10,10 @@ const port = process.env.port || 3000;
 
 //AUTH FUNCTION IN MIDDLEWARE/AUTH
 const apiKey: string = process.env.API_KEY_APPLICATION || 'default_key';
+const adapter = DatabaseAdapter();
 
-dataSource
-    .initialize()
-    .then(() => {
+adapter.createConnection()
+    .then((manager) => {
         console.log("Data Source has been initialized!")
     })
     .catch((err: any) => {

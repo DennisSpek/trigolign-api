@@ -1,5 +1,4 @@
 import express, {Request, Response} from 'express'
-import {AutoDataController} from '../../controllers/AutoDataController'
 import { CarController } from '../../controllers/CarController';
 
 const router = express.Router();

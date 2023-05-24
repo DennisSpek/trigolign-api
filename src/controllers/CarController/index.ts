@@ -1,26 +1,34 @@
 import { Request, Response } from 'express';
 import { AutoDataController } from '../../controllers/AutoDataController';
+import { DatabaseAdapter } from '../../database/adapter';
 
 interface wheelDetails {
   camber: string;
   toe: string;
 }
 
-interface Wheels {
+interface WheelSettings {
   front: wheelDetails;
   rear: wheelDetails;
+}
+
+interface Suspension {
+  name: string;
+  wheelsetting: WheelSettings
 }
 
 interface Car {
   manufacturer: string;
   model: string;
   mid: string;
-  wheels: Wheels;
+  suspension: Suspension[]
 }
 
 const autoDataController = new AutoDataController();
+const adapter = DatabaseAdapter();
 
 export class CarController {
+
   getDetailsByVRM = async (req: Request, res: Response) => {
     const { vrm } = req.params;
 
@@ -32,36 +40,23 @@ export class CarController {
           manufacturer: data[0].manufacturer || '',
           model: data[0].model || '',
           mid: data[0].mid || '',
-          wheels: { front: { camber: '', toe: ''}, rear: { camber: '', toe: ''} }
+          suspension: [],
         };
 
-        if (data[0].mid) {
-          const { data: wheelSettings } = await autoDataController.getWheelDataIdByMID(car.mid);
+        adapter.createManufacturer(car.manufacturer);
 
-          if(wheelSettings.length == 1){
+        if(car.mid){
+          const {data: suspension} = await autoDataController.getWheelDataIdByMID(car.mid);
 
-            const { data: wheelData } = await autoDataController.getWheelData(car.mid, wheelSettings[0].wheel_alignment_id);
+          car.suspension = suspension;
 
-            car.wheels = {
-              front: {
-                camber: wheelData.wheel_alignment_groups[3].technical_data_items.find((i: any) => i.description === "Front camber" && i.units === "deg") || '',
-                toe: wheelData.wheel_alignment_groups[3].technical_data_items.find((i: any) => i.description === "Front toe-in" && i.units === "deg") || '',
-              },
-              rear: {
-                camber: wheelData.wheel_alignment_groups[3].technical_data_items.find((i: any) => i.description === "Rear camber" && i.units === "deg"),
-                toe: wheelData.wheel_alignment_groups[3].technical_data_items.find((i: any) => i.description === "Rear toe-in" && i.units === "deg"),
-              }
-            };
-
-            res.send(car);
-          }
+          res.send(car);
         }
       } else {
-        res.send('No data found');
+        res.status(404).send({message: 'No data found'});
       }
     } catch (error) {
-      console.error(error);
-      res.status(500).send('An error occurred');
+      res.status(500).send({message: 'Something went wrong'});
     }
   }
 }

@@ -27,8 +27,8 @@ export class AutoDataController {
         },
       });
       return data
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error(error.response.data);
       return null
     }
   };
@@ -46,15 +46,17 @@ export class AutoDataController {
           'Accept-Language': ACCEPT_LANGUAGE,
         },
       });
-     return data
-    } catch (error) {
-      console.error(error);
-     return null
+      return data
+    } catch (error: any) {
+      console.error(error.response.data);
+      return null
     }
   };
 
   // Get wheel data
-  getWheelData = async (mid: string, variant_id: string) => {
+  getWheelAlignmentData = async (mid: string, variant_id: string) => {
+    console.log('testing', `${API_URL}/${mid}/wheel-alignment-data/${variant_id}`);
+
     try {
       const { data } = await axios.get(`${API_URL}/${mid}/wheel-alignment-data/${variant_id}`, {
         params: {
@@ -67,72 +69,9 @@ export class AutoDataController {
         },
       });
       return data
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error(error.response.data);
       return null
     }
   };
-
-  // getWheelDataByPlate = async (req: Request<{id: string}>, res: Response) => {
-  //   const { id } = req.params;
-  //   let mid: string;
-
-  //   let car = {};
-    
-  //   const { data } = await this.getDetailsByPlate(id);
-
-  //   if (data.data[0]) {
-  //     mid = data.data[0].mid
-  //     const res = await axios.get(`${API_URL}/${mid}/wheel-alignment-data`, {
-  //       params: {
-  //         'country-code': COUNTRY_CODE,
-  //         api_key: API_KEY,
-  //       },
-  //       headers: {
-  //         Accept: 'application/json',
-  //         'Accept-Language': ACCEPT_LANGUAGE,
-  //       },
-  //     });
-
-  //     car = {
-  //       manufacturer: data.data[0].manufacturer,
-  //       model: data.data[0].model,
-  //       mid: mid,
-  //     }
-      
-  //     if (res.data.data.length === 1) {
-  //       const { data } = await axios.get(`${API_URL}/${mid}/wheel-alignment-data/${res.data.data[0].wheel_alignment_id}`, {
-  //         params: {
-  //           'country-code': COUNTRY_CODE,
-  //           api_key: API_KEY,
-  //         },
-  //         headers: {
-  //           Accept: 'application/json',
-  //           'Accept-Language': ACCEPT_LANGUAGE,
-  //         },
-  //       });
-
-  //       const wheelSettings = {
-  //         "front": {
-  //           "camber": data.data.wheel_alignment_groups[3].technical_data_items.find((i: any) => i.description === "Front camber" && i.units === "deg"),
-  //           "toe": data.data.wheel_alignment_groups[3].technical_data_items.find((i: any) => i.description === "Front toe-in" && i.units === "deg"),
-  //         },
-  //         "rear": {
-  //           "camber": data.data.wheel_alignment_groups[3].technical_data_items.find((i: any) => i.description === "Rear camber" && i.units === "deg"),
-  //           "toe": data.data.wheel_alignment_groups[3].technical_data_items.find((i: any) => i.description === "Rear toe-in" && i.units === "deg"),
-  //         }
-  //       }
-
-  //       car = {
-  //        ...car,
-  //         wheelData: wheelSettings,
-  //       }
-  //     }
-  //   }
-
-    
-
-  //   res.send(car);
-  // }
-
 }

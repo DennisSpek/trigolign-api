@@ -1,6 +1,6 @@
-- Include API key
-- Protect routes
-- Search car based on Model
+Fix all outstanding bugs. Enable to search car details and return everything related to it. 
+Include DB connection and save processed queries.
+Add identifiers to API calls.
+Create an admin enviroment to keep track and visualise stored data.
 
-- 1st Call returns Car details(Model, merk, ect + MID)
-- Combine 1st call + second call
+
