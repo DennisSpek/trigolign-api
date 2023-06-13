@@ -1,13 +1,30 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Manufacturer } from './manufacturer.entity';
+import { Measurement } from './measurement.entity';
+import { Group } from './group.entity';
 
-@Entity('users')
-export class User {
-  @PrimaryGeneratedColumn()
-  id!: number;
+@Entity('cars')
+export class Car {
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
+
+  @ManyToOne(() => Manufacturer, manufacturer => manufacturer.cars)
+  @JoinColumn({ name: 'manufacturer' }) // Change column name and reference
+  manufacturer!: Manufacturer;
+
+  @OneToMany(() => Measurement, measurement => measurement.id)
+  measurements!: Measurement[];
+
+  @ManyToOne(() => Group, group => group.id)
+  @JoinColumn({ name: 'group' }) // Change column name and reference
+  group!: Group;
 
   @Column()
-  name!: string;
+  model!: string;
 
   @Column()
-  email!: string;
+  suspension!: string;
+
+  @Column({unique: true})
+  registration!: string;
 }

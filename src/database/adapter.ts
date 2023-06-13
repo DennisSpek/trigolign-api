@@ -58,5 +58,39 @@ export const DatabaseAdapter = () => {
       if (!manufacturer) return null;
       return { ...manufacturer };
     },
+
+    async getCarsByManufacturer(manufacturer: string) {
+      const m = await getManager();
+      const cars = await m.findAll('Car', { where: { manufacturer: manufacturer } });
+
+      if (!cars) return null;
+      return { ...cars };
+    },
+
+    async createCar(data: any) {
+      const m = await getManager();
+
+      const registration = data.registration
+
+      let car = await m.findOne('Car', { where: { registration } });
+
+      if (!car){
+        console.log("data", data)
+        car = await m.save("Car", data)
+      };
+
+     
+      return { ...car };
+    },
+
+    async getCar(registration: string) {
+      const m = await getManager();
+
+      const car = await m.findOne('Car', { where: { registration } });
+
+      if (!car) return null;
+
+      return { ...car };
+    },
   }
 }

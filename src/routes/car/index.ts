@@ -6,4 +6,6 @@ const carController = new CarController();
 
 router.get('/:vrm', carController.getDetailsByVRM);
 
+router.get('/technical/:mid/suspension/:alignment_id', carController.getWheelAlignmentByMID);
+
 module.exports = router;

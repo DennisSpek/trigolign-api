@@ -1,6 +1,6 @@
-Fix all outstanding bugs. Enable to search car details and return everything related to it. 
-Include DB connection and save processed queries.
-Add identifiers to API calls.
-Create an admin enviroment to keep track and visualise stored data.
+ToDo:
 
-
+Create Plan for Application. E.G. Blueprint of some sorts
+Define API routes for:
+- Get Car details
+- Get suspension details

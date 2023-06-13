@@ -1,12 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, CreateDateColumn, PrimaryColumn, OneToMany } from 'typeorm';
+import { Car } from './car.entity';
 
-@Entity('manufacturers')
+@Entity('manufacturer')
 export class Manufacturer {
-  @PrimaryGeneratedColumn('uuid')
-  id!: string;
-
-  @Column({unique: true})
+  @PrimaryColumn()
   name!: string;
+
+  @OneToMany(() => Car, car => car.manufacturer)
+  cars!: Car[];
 
   @CreateDateColumn()
   created_at!: string;

@@ -55,8 +55,7 @@ export class AutoDataController {
 
   // Get wheel data
   getWheelAlignmentData = async (mid: string, variant_id: string) => {
-    console.log('testing', `${API_URL}/${mid}/wheel-alignment-data/${variant_id}`);
-
+    
     try {
       const { data } = await axios.get(`${API_URL}/${mid}/wheel-alignment-data/${variant_id}`, {
         params: {

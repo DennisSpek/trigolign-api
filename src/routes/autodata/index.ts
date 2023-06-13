@@ -1,5 +1,5 @@
 import express, {Request, Response} from 'express'
-import {AutoDataController} from '../../controllers/AutoDataController'
+import { AutoDataController } from '../../controllers/AutoDataController'
 
 const router = express.Router();
 const autoDataController = new AutoDataController();

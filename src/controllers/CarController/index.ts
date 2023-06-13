@@ -43,7 +43,8 @@ export class CarController {
           suspension: [],
         };
 
-        adapter.createManufacturer(car.manufacturer);
+        const manufacturer = await adapter.createManufacturer(car.manufacturer);
+        await adapter.createCar({model: car.model, registration: vrm, manufacturer: manufacturer.name });
 
         if(car.mid){
           const {data: suspension} = await autoDataController.getWheelDataIdByMID(car.mid);
@@ -52,6 +53,22 @@ export class CarController {
 
           res.send(car);
         }
+      } else {
+        res.status(404).send({message: 'No data found'});
+      }
+    } catch (error) {
+      res.status(500).send({message: 'Something went wrong'});
+    }
+  }
+
+  getWheelAlignmentByMID = async (req: Request, res: Response) => { 
+    const { mid, alignment_id } = req.params;
+
+    try {
+      const { data } = await autoDataController.getWheelAlignmentData(mid, alignment_id);
+
+      if (data) {
+        res.send(data);
       } else {
         res.status(404).send({message: 'No data found'});
       }
