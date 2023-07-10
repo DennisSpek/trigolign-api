@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 
+import * as classes from "./classes";
 
 /** Global Datasource  */
 let _dataSource: any;
@@ -13,6 +14,7 @@ async function getManager() {
     password: "root",
     database: "trigolign",
     entities:["./src/database/entities/*.ts"],
+    migrations: ["./src/database/migrations/*.ts"],
     logging: false,
     synchronize: true,
   });
@@ -32,65 +34,60 @@ async function getManager() {
 
 export const DatabaseAdapter = () => {
   return {
-    async createConnection() {
-      const c = await getManager();
+    async getUser(email: string, pass: string){
+      const m = await getManager();
+      const User = classes.UserClass(m);
 
-      return c
+      const user = await User.getUser(email, pass)
+
+      return user;
     },
 
     async createManufacturer(name: string) {
       const m = await getManager();
+      const Manufacturer = classes.Manufacturer(m);
 
-      let manufacturer = await m.findOne('Manufacturer', { where: { name } });
+      const cars = await Manufacturer.createManufacturer(name)
 
-      if (!manufacturer){
-        manufacturer = await m.save("Manufacturer", {
-          name,
-        })
-      };
-      return { ...manufacturer };
+      return cars;
     },
 
     async getManufacturer(name: string) {
       const m = await getManager();
-      const manufacturer = await m.findOne('Manufacturer', { where: { name } });
+      const Manufacturer = classes.Manufacturer(m);
 
-      if (!manufacturer) return null;
-      return { ...manufacturer };
+      const cars = await Manufacturer.getManufacturer(name)
+
+      return cars;
     },
 
-    async getCarsByManufacturer(manufacturer: string) {
+    async getOrganisation(id: string) {
       const m = await getManager();
-      const cars = await m.findAll('Car', { where: { manufacturer: manufacturer } });
+      const Organisation = classes.org(m);
 
-      if (!cars) return null;
-      return { ...cars };
+      const details = await Organisation.getOrganisation(id)
+
+      return details;
     },
 
     async createCar(data: any) {
       const m = await getManager();
+      const Car = classes.CarClass(m);
 
-      const registration = data.registration
+      const cars = await Car.createCar(data)
 
-      let car = await m.findOne('Car', { where: { registration } });
-
-      if (!car){
-        console.log("data", data)
-        car = await m.save("Car", data)
-      };
-
-     
-      return { ...car };
+      return cars;
     },
 
-    async getCar(registration: string) {
+    async getCarsByOrganisation(organisation: string) {
       const m = await getManager();
+      const Car = classes.CarClass(m);
 
-      const car = await m.findOne('Car', { where: { registration } });
+      const cars = await Car.getAllCars();
 
-      if (!car) return null;
+      console.log("cars", cars)
 
-      return { ...car };
+      return cars;
     },
   }
 }

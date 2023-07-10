@@ -5,6 +5,8 @@ import * as dotenv from 'dotenv'
 dotenv.config();
 
 const routes = require('./routes');
+const login = require('./routes/login');
+
 const app:Express = express();
 const port = process.env.port || 3000;
 
@@ -12,15 +14,14 @@ const port = process.env.port || 3000;
 const apiKey: string = process.env.API_KEY_APPLICATION || 'default_key';
 const adapter = DatabaseAdapter();
 
-adapter.createConnection()
-    .then((manager) => {
-        console.log("Data Source has been initialized!")
-    })
-    .catch((err: any) => {
-        console.error("Error during Data Source initialization:", err)
-    })
+// Middleware for parsing JSON bodies
+app.use(express.json());
+
+// Middleware for parsing URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', routes);
+app.use('/login', login);
 
 app.listen(port, () => {
   console.log(`Server running at port ${port}`)
