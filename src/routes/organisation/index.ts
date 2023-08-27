@@ -4,7 +4,7 @@ import {OrganisationController} from '../../controllers/OrganisationController'
 const router = express.Router();
 const organisationController = new OrganisationController();
 
-//router.put('/new', organisationController.createOrganisation);
+router.post('/new', organisationController.createOrganisation);
 
 //router.get('/:id', organisationController.getDetails);
 

@@ -28,6 +28,15 @@ const autoDataController = new AutoDataController();
 const adapter = DatabaseAdapter();
 
 export class CarController {
+  postCar = async (req: Request, res: Response) => { 
+    try {
+      const car = await adapter.createCar(req.body);
+
+      res.status(200).send(car);
+    } catch(error) {
+      res.status(500).send({"error": error});
+    }
+  }
 
   getDetailsByVRM = async (req: Request, res: Response) => {
     const { vrm } = req.params;
@@ -42,8 +51,6 @@ export class CarController {
           mid: data[0].mid || '',
           suspension: [],
         };
-
-       
 
         const manufacturer = await adapter.createManufacturer(car.manufacturer);
 

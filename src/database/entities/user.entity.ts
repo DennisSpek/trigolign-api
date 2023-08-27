@@ -4,6 +4,8 @@ import { Measurement } from './measurement.entity';
 import { Organisation } from './organisation.entity';
 import { Branch } from './branch.entity';
 import { Employee } from './employee.entity';
+import { Car } from './car.entity';
+
 
 @Entity('users')
 export class User {
@@ -19,9 +21,12 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   password!: string;
 
-  @ManyToOne(() => Branch, branch => branch.users)
+  @ManyToOne(() => Branch, branch => branch.users, { nullable: true })
   @JoinColumn({ name: 'branch_id' }) // Update column name and reference
-  branch!: Branch;
+  branch!: Branch | null;
+
+  @OneToMany(() => Car, car => car.user)
+  cars!: Car[];
 
   @OneToOne(() => Employee, employee => employee.id)
   @JoinColumn({ name: 'employee_id' }) // Update column name and reference

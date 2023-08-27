@@ -1,7 +1,7 @@
 import { Car } from "../../entities/car.entity";
 
 export const CarClass = (m: any) => {
-  return{
+  return {
     async createCar(data: any){
       const registration = data.registration
 
@@ -29,6 +29,13 @@ export const CarClass = (m: any) => {
     },
     async getCarsByOrganisation(organisation: string){
       const cars = await m.find(Car, { relations: ["manufacturer"], where: {organisation} });
+
+      if (!cars) return null;
+
+      return cars;
+    },
+    async getCarsByBranch(branch: string){
+      const cars = await m.find(Car, { relations: ["branch"], where: {branch} });
 
       if (!cars) return null;
 

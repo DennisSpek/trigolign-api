@@ -38,7 +38,16 @@ export const DatabaseAdapter = () => {
       const m = await getManager();
       const User = classes.UserClass(m);
 
-      const user = await User.getUser(email, pass)
+      const user = await User.get(email, pass)
+
+      return user;
+    },
+
+    async updateUser(body: any, id: string){
+      const m = await getManager();
+      const User = classes.UserClass(m);
+
+      const user = await User.update(body, id)
 
       return user;
     },
@@ -61,13 +70,31 @@ export const DatabaseAdapter = () => {
       return cars;
     },
 
+    async createOrganisation(name: string) {
+      const m = await getManager();
+      const Organisation = classes.organisation(m);
+
+      const result = await Organisation.create(name)
+
+      return result;
+    },
+
     async getOrganisation(id: string) {
       const m = await getManager();
-      const Organisation = classes.org(m);
+      const Organisation = classes.organisation(m);
 
-      const details = await Organisation.getOrganisation(id)
+      const details = await Organisation.get(id)
 
       return details;
+    },
+
+     async createBranch(name: string) {
+      const m = await getManager();
+      const Branch = classes.branch(m);
+
+      const result = await Branch.create(name)
+
+      return result;
     },
 
     async createCar(data: any) {
@@ -85,7 +112,14 @@ export const DatabaseAdapter = () => {
 
       const cars = await Car.getAllCars();
 
-      console.log("cars", cars)
+      return cars;
+    },
+
+    async getCarsByBranch(branch: string) {
+      const m = await getManager();
+      const Car = classes.CarClass(m);
+
+      const cars = await Car.getAllCars();
 
       return cars;
     },

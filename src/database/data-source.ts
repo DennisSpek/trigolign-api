@@ -8,6 +8,6 @@ export const dataSource = new DataSource({
     password: "root",
     database: "trigolign",
     entities:["./src/database/entities/*.ts"],
-    logging: false,
+    logging: true,
     synchronize: true,
 })

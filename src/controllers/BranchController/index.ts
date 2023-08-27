@@ -3,14 +3,19 @@ import { DatabaseAdapter } from '../../database/adapter';
 
 const adapter = DatabaseAdapter();
 
-export class OrganisationController {
-
-  createOrganisation = async (req: Request, res: Response) => {
-    const { name } = req.body
+export class BranchController {
+  createBranch = async (req: Request, res: Response) => {
+    const { name, userId } = req.body
     try {
-      const result = await adapter.createOrganisation(name);
+      const result = await adapter.createBranch(name);
+      let user;
 
-      res.status(200).send(result)
+      if(result){
+        //updating user with proper branch ID
+        user = await adapter.updateUser({branch: result.id}, userId)
+      }
+
+      res.status(200).send(user)
     } catch (error) {
       res.status(500).send({message: 'Something went wrong', error});
     }
@@ -28,9 +33,10 @@ export class OrganisationController {
   }
 
   getCars = async (req: Request, res: Response) => {
-    //get all cars assigned to org
+    //get all cars assigned to branch
+    const { id } = req.params
     try {
-      const cars = await adapter.getCarsByOrganisation('Test');
+      const cars = await adapter.getCarsByBranch(id);
 
       res.status(200).send(cars)
     } catch (error) {

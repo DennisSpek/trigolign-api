@@ -15,9 +15,9 @@ export class Branch {
   @Column()
   name!: string;
 
-  @ManyToOne(() => Organisation, organisation => organisation.branches)
+  @ManyToOne(() => Organisation, organisation => organisation.branches, {nullable: true})
   @JoinColumn({ name: 'organisation_id' }) // Update column name and reference
-  organisation!: Organisation;
+  organisation!: Organisation | null;
 
   @OneToMany(() => User, user => user.id)
   users!: User[];

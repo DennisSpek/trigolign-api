@@ -6,6 +6,7 @@ const router = express.Router();
 const autoDataRoutes = require('./autodata');
 const carRoutes = require('./car');
 const orgRoutes = require('./organisation');
+const branchRoutes = require('./branch');
 
 // Define routes
 //router.use('/autodata', autoDataRoutes);
@@ -13,8 +14,12 @@ const orgRoutes = require('./organisation');
 // Car routes
 router.use('/car', carRoutes);
 
-//
+// organisation routes
 router.use('/organisation', orgRoutes);
+
+//branch routes
+router.use('/branch', branchRoutes);
+
 
 // Test route
 //router.use('/test', testRoutes);
