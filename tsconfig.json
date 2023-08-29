@@ -11,6 +11,7 @@
     "lib": [
       "esnext"
     ],
+    "types": ["express"],
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "module": "CommonJS"
