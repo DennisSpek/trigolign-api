@@ -35,6 +35,7 @@ export class BranchController {
   getCars = async (req: Request, res: Response) => {
     //get all cars assigned to branch
     const { id } = req.params
+
     try {
       const cars = await adapter.getCarsByBranch(id);
 

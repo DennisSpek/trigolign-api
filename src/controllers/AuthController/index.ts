@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken'
 import { DatabaseAdapter } from '../../database/adapter';
 
 const adapter = DatabaseAdapter();
@@ -30,10 +29,6 @@ export class AuthController {
     try {
       if(pass && email){
         const user = await adapter.getUser(email, pass);
-
-        const token = jwt.sign({user}, 'agHfINQsIQs1xQ105dLDoy16dxqW+pVRHl+jnV+thCE=');
-
-        res.cookie('user_session', token, {path: '/', httpOnly: false, sameSite: 'none'});
 
         res.status(200).send(user);
       }

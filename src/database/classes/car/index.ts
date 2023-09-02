@@ -3,7 +3,7 @@ import { Car } from "../../entities/car.entity";
 export const CarClass = (m: any) => {
   return {
     async createCar(data: any){
-      const registration = data.registration
+      const registration = data.registration;
 
       let car = await m.findOne('Car', { where: { registration } });
 
@@ -34,12 +34,16 @@ export const CarClass = (m: any) => {
 
       return cars;
     },
-    async getCarsByBranch(branch: string){
-      const cars = await m.find(Car, { relations: ["branch"], where: {branch} });
+    async getCarsByBranch(branch_id: string){
+      try {
+        const cars = await m.find(Car, { where: { branch: { id: branch_id } } });
 
-      if (!cars) return null;
+        if (!cars) return null;
 
-      return cars;
+        return cars;
+      } catch (error) {
+        console.error('Error querying cars:', error);
+      }
     },
 
   }

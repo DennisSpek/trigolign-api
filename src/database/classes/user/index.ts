@@ -20,7 +20,7 @@ export const UserClass = (m: any) => {
     async update(body: object, id: string){
 
       const user = await m.findOne(User, { where: { id }});
-      console.log("user", user)
+      
       const upatedUser = await m.save(User, { where: { id }, ...{...user, ...body} });
 
       if (upatedUser) {

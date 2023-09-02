@@ -15,7 +15,7 @@ async function getManager() {
     database: "trigolign",
     entities:["./src/database/entities/*.ts"],
     migrations: ["./src/database/migrations/*.ts"],
-    logging: false,
+    logging: true,
     synchronize: true,
   });
 
@@ -115,11 +115,11 @@ export const DatabaseAdapter = () => {
       return cars;
     },
 
-    async getCarsByBranch(branch: string) {
+    async getCarsByBranch(id: string) {
       const m = await getManager();
       const Car = classes.CarClass(m);
 
-      const cars = await Car.getAllCars();
+      const cars = await Car.getCarsByBranch(id);
 
       return cars;
     },

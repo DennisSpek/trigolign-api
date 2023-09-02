@@ -2,12 +2,12 @@ import { DataSource } from "typeorm"
 
 export const dataSource = new DataSource({
     type: "mysql",
-    host: "localhost",
-    port: 8889,
-    username: "root",
-    password: "root",
-    database: "trigolign",
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT!, 10),
+    username: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     entities:["./src/database/entities/*.ts"],
-    logging: true,
-    synchronize: true,
+    logging: false,
+    synchronize: process.env.DB_SYNC === 'true',
 })
