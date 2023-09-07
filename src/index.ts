@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', routes);
 app.use('/login', login);
-app.get('/', (req, res) => res.json(process.env.DB_PORT))
+app.get('/', (req, res) => res.json(`API running! Test ENV: ${process.env.DB_PORT}`))
 
 app.listen(port, () => {
   console.log(`Server running at port ${port}`)
