@@ -25,7 +25,7 @@ async function getManager() {
       : _dataSource.manager;
   
   if (!manager.connection.isInitialized) {
-    console.log("Initializing connection...");
+    console.log("Initializing connection...", manager);
     await manager.connection.initialize();
   }
   
