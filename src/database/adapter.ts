@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm"
+import { dataSource } from './data-source'
 
 import * as classes from "./classes";
 
@@ -6,18 +7,7 @@ import * as classes from "./classes";
 let _dataSource: any;
 
 async function getManager() {
-  if (!_dataSource) _dataSource = await new DataSource({
-    type: "mysql",
-    host: "localhost",
-    port: 8889,
-    username: "root",
-    password: "root",
-    database: "trigolign",
-    entities:["./src/database/entities/*.ts"],
-    migrations: ["./src/database/migrations/*.ts"],
-    logging: true,
-    synchronize: true,
-  });
+  if (!_dataSource) _dataSource = await dataSource;
 
   const manager =
     _dataSource === null || _dataSource === void 0
