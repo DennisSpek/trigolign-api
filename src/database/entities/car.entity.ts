@@ -27,9 +27,15 @@ export class Car {
   @Column()
   model!: string;
 
-  @Column()
+  @Column({default: null})
   suspension!: string;
 
   @Column({unique: true})
   registration!: string;
+
+  @Column({ default: 0})
+  custom!: boolean;
+
+  @Column({default: null})
+  mid!: string;
 }

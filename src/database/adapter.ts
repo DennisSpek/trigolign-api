@@ -25,7 +25,7 @@ async function getManager() {
       : _dataSource.manager;
   
   if (!manager.connection.isInitialized) {
-    console.log("Initializing connection...", manager);
+    console.log("Initializing connection...");
     await manager.connection.initialize();
   }
   
@@ -101,9 +101,9 @@ export const DatabaseAdapter = () => {
       const m = await getManager();
       const Car = classes.CarClass(m);
 
-      const cars = await Car.createCar(data)
+      const car = await Car.createCar(data)
 
-      return cars;
+      return car;
     },
 
     async getCarsByOrganisation(organisation: string) {

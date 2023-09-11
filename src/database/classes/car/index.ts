@@ -7,8 +7,19 @@ export const CarClass = (m: any) => {
 
       let car = await m.findOne('Car', { where: { registration } });
 
+      console.log("data", data)
+
       if (!car){
-        car = await m.save("Car", data)
+        car = await m.save("Car", {
+          model: data.model,
+          registration: data.registration,
+          suspension: data.suspension,
+          branch: data.branch,
+          user: data.user,
+          manufacturer: data.manufacturer,
+          custom: data.custom,
+          mid: data.mid
+        })
       };
      
       return { ...car };
@@ -36,7 +47,7 @@ export const CarClass = (m: any) => {
     },
     async getCarsByBranch(branch_id: string){
       try {
-        const cars = await m.find(Car, { where: { branch: { id: branch_id } } });
+        const cars = await m.find(Car, { relations: ["manufacturer"], where: { branch: { id: branch_id } } });
 
         if (!cars) return null;
 
