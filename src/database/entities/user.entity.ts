@@ -12,7 +12,7 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column()
+  @Column({default: 'user'})
   name!: string;
 
   @Column()
@@ -35,6 +35,6 @@ export class User {
   @Column({default: 'client'})
   role!: string;
 
-  @Column()
+  @Column({generated: 'uuid' })
   token!: string;
 }

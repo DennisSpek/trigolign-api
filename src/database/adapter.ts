@@ -15,7 +15,7 @@ async function getManager() {
     database: process.env.DB_NAME,
     entities:["./src/database/entities/*.ts"],
     migrations: ["./src/database/migrations/*.ts"],
-    logging: true,
+    logging: false,
     synchronize: process.env.DB_SYNC === 'true',
   });
 
@@ -25,7 +25,7 @@ async function getManager() {
       : _dataSource.manager;
   
   if (!manager.connection.isInitialized) {
-    console.log("Initializing connection...", manager);
+    //console.log("Initializing connection...", manager);
     await manager.connection.initialize();
   }
   
@@ -39,6 +39,15 @@ export const DatabaseAdapter = () => {
       const User = classes.UserClass(m);
 
       const user = await User.get(email, pass)
+
+      return user;
+    },
+
+    async registerUser(email: string, pass: string){
+      const m = await getManager();
+      const User = classes.UserClass(m);
+
+      const user = await User.create(email, pass)
 
       return user;
     },

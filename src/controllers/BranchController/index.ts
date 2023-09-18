@@ -6,14 +6,17 @@ const adapter = DatabaseAdapter();
 export class BranchController {
   createBranch = async (req: Request, res: Response) => {
     const { name, userId } = req.body
+
     try {
       const result = await adapter.createBranch(name);
       let user;
 
       if(result){
         //updating user with proper branch ID
-        user = await adapter.updateUser({branch: result.id}, userId)
+        user = await adapter.updateUser({branch: result.id}, userId);
       }
+
+      console.log("user", user)
 
       res.status(200).send(user)
     } catch (error) {

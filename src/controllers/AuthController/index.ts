@@ -7,11 +7,9 @@ export class AuthController {
   register = async (req: Request, res: Response) => {
     const { pass, email } = req.body;
 
-    //becrypt 12 salt
-
     try {
       if(pass && email){
-        const user = await adapter.getUser(email, pass);
+        const user = await adapter.registerUser(email, pass);
 
         res.status(200).send(user);
       }

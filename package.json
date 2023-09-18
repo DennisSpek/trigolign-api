@@ -17,6 +17,7 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
     "@types/jsonwebtoken": "^9.0.2",
     "aws-sdk": "^2.1447.0",
