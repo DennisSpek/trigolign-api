@@ -5,7 +5,7 @@ import * as classes from "./classes";
 /** Global Datasource  */
 let _dataSource: any;
 
-async function getManager() {
+export async function getManager() {
   if (!_dataSource) _dataSource = await new DataSource({
     type: "mysql",
     host: process.env.DB_HOST,
@@ -15,8 +15,9 @@ async function getManager() {
     database: process.env.DB_NAME,
     entities:["./src/database/entities/*.ts"],
     migrations: ["./src/database/migrations/*.ts"],
-    logging: false,
-    synchronize: process.env.DB_SYNC === 'true',
+    logging: true,
+    //synchronize: process.env.DB_SYNC === 'true',
+    synchronize: true,
   });
 
   const manager =

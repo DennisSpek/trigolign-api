@@ -1,5 +1,4 @@
 import express, {Express, Request, Response} from 'express';
-import { DatabaseAdapter } from "./database/adapter"
 
 import cookieParser from 'cookie-parser'
 
@@ -16,7 +15,6 @@ const port = process.env.port || 3000;
 
 //AUTH FUNCTION IN MIDDLEWARE/AUTH
 const apiKey: string = process.env.API_KEY_APPLICATION || 'default_key';
-const adapter = DatabaseAdapter();
 
 //CORS
 app.use((req, res, next) => {
@@ -37,8 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', routes);
 app.use('/login', login);
 app.use('/register', register);
-app.get('/', (req, res) => res.json(`API running! Test ENV: ${process.env.DB_PORT}`))
+app.get('/', async (req, res) => res.json(`API is running!`))
 
 app.listen(port, () => {
-  console.log(`Adapter: ${adapter}`)
+  console.log(`Server running at port ${port}. `)
 })
