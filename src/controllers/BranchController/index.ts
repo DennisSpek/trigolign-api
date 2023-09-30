@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { DatabaseAdapter } from '../../database/adapter';
+import { DatabaseAdapter, getManager } from '../../database/adapter';
 
 const adapter = DatabaseAdapter();
 
@@ -26,6 +26,9 @@ export class BranchController {
 
   getDetails = async (req: Request, res: Response) => {
     const { id } = req.params
+    const manager = await getManager()
+
+    console.log("manager", manager)
     try {
       const details = await adapter.getOrganisation(id);
 
