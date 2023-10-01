@@ -34,7 +34,7 @@ export class BranchController {
 
       res.status(200).send(details)
     } catch (error) {
-      res.status(500).send({message: 'Something went wrong', error});
+      res.status(500).send({message: 'Something went wrong'});
     }
   }
 

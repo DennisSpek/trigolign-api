@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm"
+import * as path from 'path';
 
 import * as classes from "./classes";
 
@@ -13,8 +14,10 @@ export async function getManager() {
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
-    entities:["./src/database/entities/*.ts"],
-    migrations: ["./src/database/migrations/*.ts"],
+    entities: [
+      path.join(__dirname, "/entities/*{.ts,.js}")
+    ],
+    //migrations: ["./src/database/migrations/{.ts,.js}"],
     logging: true,
     //synchronize: process.env.DB_SYNC === 'true',
     synchronize: true,
