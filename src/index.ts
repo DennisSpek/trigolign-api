@@ -6,9 +6,18 @@ import cookieParser from 'cookie-parser'
 import * as dotenv from 'dotenv' 
 dotenv.config();
 
+const https = require('https');
+const http = require('http')
+const fs = require('node:fs');
+
 const routes = require('./routes');
 const login = require('./routes/login');
 const register = require('./routes/register');
+
+const options = {
+  key: process.env.ENV != 'development' && fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
+  cert: process.env.ENV != 'development' && fs.readFileSync('test/fixtures/keys/agent2-cert.pem'),
+};
 
 const app:Express = express();
 const port = process.env.PORT || 3000;
@@ -37,6 +46,11 @@ app.use('/login', login);
 app.use('/register', register);
 app.get('/', async (req, res) => res.json(`API is running on port: ${process.env.PORT}`))
 
-app.listen(port, () => {
-  console.log(`Server running at port ${port}. `)
-})
+process.env.ENV = 'development' ? 
+  http.createServer(app).listen(port, () => {
+   console.log(`Server running at port ${port}. `)
+  }) 
+  : 
+  https.createServer(options, app).listen(port, () => {
+   console.log(`Server running at port ${port}. `)
+  });
