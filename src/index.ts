@@ -15,8 +15,8 @@ const login = require('./routes/login');
 const register = require('./routes/register');
 
 const options = {
-  key: process.env.ENV != 'development' && fs.readFileSync('test/fixtures/keys/agent2-key.pem'),
-  cert: process.env.ENV != 'development' && fs.readFileSync('test/fixtures/keys/agent2-cert.pem'),
+  key: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
+  cert: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
 };
 
 const app:Express = express();
