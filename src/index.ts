@@ -8,15 +8,16 @@ dotenv.config();
 
 const https = require('https');
 const http = require('http')
-const fs = require('node:fs');
+const path = require('path');
+
 
 const routes = require('./routes');
 const login = require('./routes/login');
 const register = require('./routes/register');
 
 const options = {
-  key: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
-  cert: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
+  key: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
+  cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
 };
 
 const app:Express = express();
