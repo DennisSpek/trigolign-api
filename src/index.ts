@@ -18,8 +18,8 @@ const login = require('./routes/login');
 const register = require('./routes/register');
 
 const options = {
-  key: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey.pem').replace(/\\n/g, '\n'),
-  cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/cert.pem').replace(/\\n/g, '\n'),
+  key: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
+  cert: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/cert.pem'),
 };
 
 const app:Express = express();
@@ -52,7 +52,7 @@ app.get('/', async (req, res) => res.json(`API is running on port: ${process.env
 
 process.env.ENV == 'development' ? 
   http.createServer(app).listen(port, () => {
-   console.log(`Server running at port ${port}.  ${fs.statSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem').isFile()}`)
+   console.log(`Server running at port ${port}.  ${fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem')}`)
   }) 
   : 
   https.createServer(options, app).listen(port, () => {
