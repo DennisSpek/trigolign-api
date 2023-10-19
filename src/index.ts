@@ -54,7 +54,7 @@ app.get('/', async (req, res) => res.json(`API is running on port: ${process.env
 
 process.env.ENV = 'development' ? 
   http.createServer(app).listen(port, () => {
-   console.log(`Server running at port ${port}. `)
+   console.log(`Server running at port ${port}. Test`)
   }) 
   : 
   https.createServer(options, app).listen(port, () => {
