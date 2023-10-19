@@ -58,5 +58,5 @@ process.env.ENV = 'development' ?
   }) 
   : 
   https.createServer(options, app).listen(port, () => {
-   console.log(`Server running at port ${port}. `)
+   console.log(`Server running at port ${port}. ${options}`)
   });
