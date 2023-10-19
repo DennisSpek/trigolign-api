@@ -20,6 +20,11 @@ const options = {
   cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
 };
 
+const options = {
+  key: path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
+  cert: path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
+};
+
 const app:Express = express();
 const port = process.env.PORT || 3000;
 
