@@ -10,6 +10,8 @@ const https = require('https');
 const http = require('http')
 const path = require('path');
 
+const fs = require('fs');
+
 
 const routes = require('./routes');
 const login = require('./routes/login');
@@ -50,7 +52,7 @@ app.get('/', async (req, res) => res.json(`API is running on port: ${process.env
 
 process.env.ENV == 'development' ? 
   http.createServer(app).listen(port, () => {
-   console.log(`Server running at port ${port}.  ${fs.stat('/etc/letsencrypt/live/api.trigolign.com/privkey.pem')}`)
+   console.log(`Server running at port ${port}.  ${fs.statSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem').isFile()}`)
   }) 
   : 
   https.createServer(options, app).listen(port, () => {
