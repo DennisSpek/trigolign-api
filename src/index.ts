@@ -17,7 +17,7 @@ const register = require('./routes/register');
 
 const options = {
   key: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
-  cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/cert.pem'),
+  cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
 };
 
 const app:Express = express();
