@@ -52,7 +52,7 @@ app.get('/', async (req, res) => res.json(`API is running on port: ${process.env
 
 process.env.ENV == 'development' ? 
   http.createServer(app).listen(port, () => {
-   console.log(`Server running at port ${port}.  ${fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem')}`)
+   console.log(`Server running at port ${port}.`)
   }) 
   : 
   https.createServer(options, app).listen(port, () => {
