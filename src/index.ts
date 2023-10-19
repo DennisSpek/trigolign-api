@@ -15,18 +15,14 @@ const routes = require('./routes');
 const login = require('./routes/login');
 const register = require('./routes/register');
 
-// const options = {
-//   key: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey123.pem'),
-//   cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
-// };
-
 const options = {
-  key: path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
-  cert: path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
+  key: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
+  cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
 };
 
 const app:Express = express();
 const port = process.env.PORT || 3000;
+const env = process.env.ENV;
 
 //AUTH FUNCTION IN MIDDLEWARE/AUTH
 const apiKey: string = process.env.API_KEY_APPLICATION || 'default_key';
@@ -52,9 +48,9 @@ app.use('/login', login);
 app.use('/register', register);
 app.get('/', async (req, res) => res.json(`API is running on port: ${process.env.PORT}`))
 
-process.env.ENV = 'development' ? 
+process.env.ENV == 'development' ? 
   http.createServer(app).listen(port, () => {
-   console.log(`Server running at port ${port}. ${process.env.ENV}`)
+   console.log(`Server running at port ${port}. `)
   }) 
   : 
   https.createServer(options, app).listen(port, () => {
