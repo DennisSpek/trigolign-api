@@ -15,10 +15,10 @@ const routes = require('./routes');
 const login = require('./routes/login');
 const register = require('./routes/register');
 
-const options = {
-  key: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey123.pem'),
-  cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
-};
+// const options = {
+//   key: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey123.pem'),
+//   cert: process.env.ENV != 'development' && path.resolve('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
+// };
 
 const options = {
   key: path.resolve('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
