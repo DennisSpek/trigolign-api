@@ -21,6 +21,11 @@ export async function getManager() {
     logging: true,
     //synchronize: process.env.DB_SYNC === 'true',
     synchronize: true,
+    ssl: process.env.ENV != 'development' && {
+      rejectUnauthorized: false,
+      key:  fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
+      cert: fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/cert.pem'),
+    }
   });
 
   const manager =
