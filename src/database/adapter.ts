@@ -1,8 +1,6 @@
 import { DataSource } from "typeorm"
 import * as path from 'path';
 import * as classes from "./classes";
-const fs = require('fs');
-
 
 /** Global Datasource  */
 let _dataSource: any;
@@ -22,11 +20,6 @@ export async function getManager() {
     logging: true,
     //synchronize: process.env.DB_SYNC === 'true',
     synchronize: true,
-    ssl: process.env.ENV != 'development' && {
-      rejectUnauthorized: false,
-      key:  fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
-      cert: fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/cert.pem'),
-    }
   });
 
   const manager =
