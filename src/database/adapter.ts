@@ -1,7 +1,8 @@
 import { DataSource } from "typeorm"
 import * as path from 'path';
-
 import * as classes from "./classes";
+const fs = require('fs');
+
 
 /** Global Datasource  */
 let _dataSource: any;
