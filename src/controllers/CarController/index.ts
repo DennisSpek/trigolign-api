@@ -54,10 +54,6 @@ export class CarController {
 
         const manufacturer = await adapter.createManufacturer(car.manufacturer);
 
-        const trigolignId = '74645c37-0494-4193-bf5b-da8a87cc226b'
-
-        await adapter.createCar({model: car.model, registration: vrm, manufacturer: manufacturer.name, organisation: trigolignId, suspension:"" });
-
         if(car.mid){
 
           const {data: suspension} = await autoDataController.getWheelDataIdByMID(car.mid);
