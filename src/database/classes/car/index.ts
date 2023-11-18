@@ -1,4 +1,5 @@
 import { Car } from "../../entities/car.entity";
+import { Suspension } from "../../entities/suspension.entity"
 
 export const CarClass = (m: any) => {
   return {
@@ -7,13 +8,18 @@ export const CarClass = (m: any) => {
 
       let car = await m.findOne('Car', { where: { registration } });
 
-      console.log("data", data)
+      
 
-      if (!car){
+      if (car == null){
+        console.log("suspension", data)
+        const suspension = await m.save("Suspension", data.suspensionObject)
+        
+        
+
         car = await m.save("Car", {
           model: data.model,
           registration: data.registration,
-          suspension: data.suspension,
+          suspension: suspension.id,
           branch: data.branch,
           user: data.user,
           manufacturer: data.manufacturer,

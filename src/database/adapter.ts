@@ -17,7 +17,7 @@ export async function getManager() {
       path.join(__dirname, "/entities/*{.ts,.js}")
     ],
     //migrations: ["./src/database/migrations/{.ts,.js}"],
-    logging: true,
+    logging: false,
     //synchronize: process.env.DB_SYNC === 'true',
     synchronize: true,
   });

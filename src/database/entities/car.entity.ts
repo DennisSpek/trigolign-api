@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn, OneToOne } from 'typeorm';
 import { Manufacturer } from './manufacturer.entity';
 import { Measurement } from './measurement.entity';
 import { Branch } from './branch.entity';
 import { User } from './user.entity';
+import { Suspension } from './suspension.entity'
 
 @Entity('cars')
 export class Car {
@@ -27,7 +28,8 @@ export class Car {
   @Column()
   model!: string;
 
-  @Column({default: null})
+  @OneToOne(() => Suspension, suspension => suspension.id)
+  @JoinColumn({ name: 'suspension_id' })
   suspension!: string;
 
   @Column({unique: true})
