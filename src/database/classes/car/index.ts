@@ -30,8 +30,17 @@ export const CarClass = (m: any) => {
      
       return { ...car };
     },
+    async getCar(id: string){
+      const cars = await m.findOne(Car, { relations: ["manufacturer", "suspension", "measurements"], where: {id} });
+
+      console.log("cars", cars)
+
+      if (!cars) return null;
+
+      return cars;
+    },
     async getAllCars(){
-      const cars = await m.find(Car, { relations: ["manufacturer", "organisation"] });
+      const cars = await m.find(Car, { relations: ["manufacturer"] });
 
       if (!cars) return null;
 

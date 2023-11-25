@@ -38,6 +38,18 @@ export class CarController {
     }
   }
 
+  getCar = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+      const car = await adapter.getCar(id);
+
+      res.status(200).send(car);
+    } catch(error) {
+      res.status(500).send({"error": error});
+    }
+  }
+
   getDetailsByVRM = async (req: Request, res: Response) => {
     const { vrm } = req.params;
 
