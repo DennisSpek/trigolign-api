@@ -7,8 +7,6 @@ export const UserClass = (m: any) => {
     async get(email: string, password: string){
       const user = await m.findOne(User, { where: { email }, relations: ["branch"] });
 
-      console.log("Testing")
-
       if (user) {
         const result = await bcrypt.compare(password, user.password);
 

@@ -11,10 +11,7 @@ export const CarClass = (m: any) => {
       
 
       if (car == null){
-        console.log("suspension", data)
         const suspension = await m.save("Suspension", data.suspensionObject)
-        
-        
 
         car = await m.save("Car", {
           model: data.model,
@@ -32,8 +29,6 @@ export const CarClass = (m: any) => {
     },
     async getCar(id: string){
       const cars = await m.findOne(Car, { relations: ["manufacturer", "suspension", "measurements"], where: {id} });
-
-      console.log("cars", cars)
 
       if (!cars) return null;
 

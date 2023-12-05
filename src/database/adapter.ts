@@ -144,5 +144,14 @@ export const DatabaseAdapter = () => {
 
       return cars;
     },
+
+    async createMeasurement(data: any) {
+      const m = await getManager();
+      const MeasurementClass = classes.MeasurementClass(m);
+
+      const measurement = await MeasurementClass.createMeasurement(data)
+
+      return measurement;
+    },
   }
 }
