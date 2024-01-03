@@ -2,6 +2,8 @@ import{ Entity, CreateDateColumn, Column, PrimaryGeneratedColumn, OneToOne, Many
 import { Car } from './car.entity';
 import { Device } from './device.entity';
 import { MeasurementSetting } from './measurement-settings.entity'
+import { MeasurementResult } from './measurement-result.entity'
+
 
 @Entity('measurements')
 export class Measurement {
@@ -19,20 +21,11 @@ export class Measurement {
   @CreateDateColumn()
   created_at!: string;
 
-  @OneToOne(() => MeasurementSetting, measurement => measurement.id)
+  @OneToOne(() => MeasurementSetting, setting => setting.id)
   @JoinColumn({ name: 'settings' }) // Change column name and reference
   settings!: MeasurementSetting;
 
-  @JoinColumn()
-  front_left_toe!: string;
-
-  @JoinColumn()
-  front_right_toe!: string;
-
-  @JoinColumn()
-  back_left_toe!: string;
-
-  @JoinColumn()
-  back_right_toe!: string;
-
+  @OneToOne(() => MeasurementResult, result => result.id)
+  @JoinColumn({ name: 'result' }) // Change column name and reference
+  result!: MeasurementResult;
 }

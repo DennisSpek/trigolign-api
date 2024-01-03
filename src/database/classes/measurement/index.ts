@@ -1,18 +1,34 @@
 import { MeasurementSetting } from "../../entities/measurement-settings.entity";
+import { MeasurementResult } from '../../entities/measurement-result.entity';
 import { Measurement } from "../../entities/measurement.entity"
+import { calculateMeasurement } from "../../../lib/measurement"
 
 export const MeasurementClass = (m: any) => {
+
   return {
     async createMeasurement(data: any){
-      console.log("data", data)
-      const settingId = await m.save("MeasurementSetting", data)
+      const settingId = await m.save(MeasurementSetting, data)
 
-      const measurement = await m.save("Measurement", {
+      const result = await calculateMeasurement(data)
+
+      const resultId = await m.save(MeasurementResult, {result: result})
+
+      const measurement = await m.save(Measurement, {
         car: data.car_id,
-        settings: settingId
+        settings: settingId,
+        result: resultId
       })
      
-      return { ...measurement };
+      return measurement;
+    },
+
+    async getMeasurement(id: any){
+     
+      const measurement = await m.findOne(Measurement, { relations: ["settings", "result"], where: {id}})
+
+      console.log("measurement", measurement)
+     
+      return measurement;
     },
 
   }

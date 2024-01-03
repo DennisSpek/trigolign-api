@@ -153,5 +153,14 @@ export const DatabaseAdapter = () => {
 
       return measurement;
     },
+
+    async getMeasurement(id: any) {
+      const m = await getManager();
+      const MeasurementClass = classes.MeasurementClass(m);
+
+      const measurement = await MeasurementClass.getMeasurement(id)
+
+      return measurement;
+    },
   }
 }

@@ -15,7 +15,8 @@ export class Car {
   manufacturer!: Manufacturer;
 
   @OneToMany(() => Measurement, measurement => measurement.car)
-  measurements!: Measurement[];
+  @JoinColumn({ name: 'measurements' })
+  measurements!: Measurement;
 
   @ManyToOne(() => Branch, branch => branch.cars)
   @JoinColumn({ name: 'branch_id' }) // Update column name and reference

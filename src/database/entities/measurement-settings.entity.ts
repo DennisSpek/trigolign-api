@@ -29,4 +29,28 @@ export class MeasurementSetting {
 
   @Column({ default: null })
   distance_x_y!: string;
+
+  @Column()
+  toe_front_left_front!: string;
+
+  @Column()
+  toe_front_left_back!: string;
+
+  @Column()
+  toe_front_right_front!: string;
+
+  @Column()
+  toe_front_right_back!: string;
+
+  @Column()
+  toe_back_left_front!: string;
+
+  @Column()
+  toe_back_left_back!: string;
+
+  @Column()
+  toe_back_right_front!: string;
+
+  @Column()
+  toe_back_right_back!: string;
 }

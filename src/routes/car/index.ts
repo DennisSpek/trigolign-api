@@ -16,6 +16,8 @@ router.post('/post', carController.postCar);
 
 router.post('/measurement/post', measurementController.postMeasurement)
 
+router.get('/measurement/:id', measurementController.getMeasurement)
+
 router.get('/technical/:mid/suspension/:alignment_id', carController.getWheelAlignmentByMID);
 
 module.exports = router;

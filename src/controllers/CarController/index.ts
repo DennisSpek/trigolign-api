@@ -64,8 +64,6 @@ export class CarController {
           suspension: [],
         };
 
-        const manufacturer = await adapter.createManufacturer(car.manufacturer);
-
         if(car.mid){
 
           const {data: suspension} = await autoDataController.getWheelDataIdByMID(car.mid);
