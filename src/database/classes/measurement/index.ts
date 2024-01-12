@@ -7,11 +7,11 @@ export const MeasurementClass = (m: any) => {
 
   return {
     async createMeasurement(data: any){
-      const settingId = await m.save(MeasurementSetting, data)
+      const settingId = await m.save(MeasurementSetting, data);
 
-      const result = await calculateMeasurement(data)
+      const result = await calculateMeasurement(data);
 
-      const resultId = await m.save(MeasurementResult, {result: result})
+      const resultId = await m.save(MeasurementResult, {result: result});
 
       const measurement = await m.save(Measurement, {
         car: data.car_id,
@@ -24,9 +24,7 @@ export const MeasurementClass = (m: any) => {
 
     async getMeasurement(id: any){
      
-      const measurement = await m.findOne(Measurement, { relations: ["settings", "result"], where: {id}})
-
-      console.log("measurement", measurement)
+      const measurement = await m.findOne(Measurement, { relations: ["settings", "result"], where: {id}});
      
       return measurement;
     },
