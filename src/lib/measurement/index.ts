@@ -56,7 +56,7 @@ export const calculateMeasurement = async (data: any) => {
 
   // Total Back Wheel Calculated
   const total_back_wheel = back_right_toe_average-((back_right_toe_average-back_left_toe_average) /2);
-  const total_back_toe = front_left_toe + front_right_toe;
+  const total_back_toe = back_left_toe + back_right_toe;
   const thrustangle = (back_left_toe - back_right_toe)/2;
 
   return {
