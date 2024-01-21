@@ -7,7 +7,7 @@ interface Data {
   id: string; 
 }
 
-export const calculateMeasurement = async (data: any) => {
+export const calculateToe = async (data: any) => {
   const { toe_values_relative, basis_toe_measurement, show_item_first, camber_caster_value, car_id, id}: Data = data;
   const wheelbase_left: number = parseInt(data.wheelbase_left);
   const wheelbase_right: number = parseInt(data.wheelbase_right);

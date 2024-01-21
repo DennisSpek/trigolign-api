@@ -1,7 +1,7 @@
 import { MeasurementSetting } from "../../entities/measurement-settings.entity";
 import { MeasurementResult } from '../../entities/measurement-result.entity';
 import { Measurement } from "../../entities/measurement.entity"
-import { calculateMeasurement } from "../../../lib/measurement"
+import { calculateToe } from "../../../lib/measurements/toe"
 
 export const MeasurementClass = (m: any) => {
 
@@ -9,7 +9,7 @@ export const MeasurementClass = (m: any) => {
     async createMeasurement(data: any){
       const settingId = await m.save(MeasurementSetting, data);
 
-      const result = await calculateMeasurement(data);
+      const result = await calculateToe(data);
 
       const resultId = await m.save(MeasurementResult, {result: result});
 
