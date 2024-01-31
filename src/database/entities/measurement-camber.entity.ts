@@ -3,8 +3,8 @@ import { Car } from './car.entity';
 import { Device } from './device.entity';
 import { MeasurementSetting } from './measurement-settings.entity'
 
-@Entity('measurement-result')
-export class MeasurementResult {
+@Entity('measurement-camber')
+export class MeasurementCamber {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 

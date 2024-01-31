@@ -2,13 +2,13 @@ interface Data {
   toe_values_relative: string;
   basis_toe_measurement: string;
   show_item_first: string;
-  camber_caster_value: string;
+  camber_unit: string;
   car_id: string;
   id: string; 
 }
 
 export const calculateToe = async (data: any) => {
-  const { toe_values_relative, basis_toe_measurement, show_item_first, camber_caster_value, car_id, id}: Data = data;
+  const { toe_values_relative, basis_toe_measurement, show_item_first, camber_unit, car_id, id}: Data = data;
   const wheelbase_left: number = parseInt(data.wheelbase_left);
   const wheelbase_right: number = parseInt(data.wheelbase_right);
   const distance_x: number = parseInt(data.distance_x);
@@ -28,13 +28,13 @@ export const calculateToe = async (data: any) => {
 
   //Left Front Wheel Calculatated
   const front_left_toe = (Math.atan((front_left_toe_front - front_left_toe_back) / distance_between_rulers)) * (180 / Math.PI);
-  const y_FL = (((front_left_toe_front-front_left_toe_back)/ distance_between_rulers))*(distance_front_ruler_front_axle*10)
+  const y_FL = (((front_left_toe_front-front_left_toe_back)/ distance_between_rulers))*(distance_front_ruler_front_axle)
 
   const front_left_toe_average = front_left_toe_front - y_FL;
 
   //right Front Wheel Calculatated
   const front_right_toe = -(Math.atan((front_right_toe_front - front_right_toe_back) / distance_between_rulers)) * (180 / Math.PI);
-  const y_FR = -(((front_right_toe_front - front_right_toe_back) / distance_between_rulers))*(distance_front_ruler_front_axle*10);
+  const y_FR = -(((front_right_toe_front - front_right_toe_back) / distance_between_rulers))*(distance_front_ruler_front_axle);
 
   const front_right_toe_average = front_right_toe_front + y_FR;
 
@@ -44,13 +44,13 @@ export const calculateToe = async (data: any) => {
 
   //Left Back Wheel Calculatated
   const back_left_toe = (Math.atan((back_left_toe_front - back_left_toe_back) / distance_between_rulers)) * (180 / Math.PI);
-  const y_BL = (((back_left_toe_front - back_left_toe_back) / distance_between_rulers)*((distance_front_ruler_front_axle*10) + wheelbase_average));
+  const y_BL = (((back_left_toe_front - back_left_toe_back) / distance_between_rulers)*((distance_front_ruler_front_axle) + wheelbase_average));
 
   const back_left_toe_average = back_left_toe_front - y_BL;
 
   //right Back Wheel Calculatated
   const back_right_toe = (Math.atan((back_right_toe_front - back_right_toe_back) / distance_between_rulers)) * (180 / Math.PI);
-  const y_BR = (((front_right_toe_front - front_right_toe_back) / distance_between_rulers)*((distance_front_ruler_front_axle*10) + wheelbase_average));
+  const y_BR = (((front_right_toe_front - front_right_toe_back) / distance_between_rulers)*((distance_front_ruler_front_axle) + wheelbase_average));
 
   const back_right_toe_average = back_right_toe_front - y_BR;
 

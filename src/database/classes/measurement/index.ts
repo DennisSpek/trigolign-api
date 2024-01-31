@@ -1,7 +1,9 @@
 import { MeasurementSetting } from "../../entities/measurement-settings.entity";
-import { MeasurementResult } from '../../entities/measurement-result.entity';
+import { MeasurementToe } from '../../entities/measurement-toe.entity';
+import { MeasurementCamber } from '../../entities/measurement-camber.entity';
 import { Measurement } from "../../entities/measurement.entity"
 import { calculateToe } from "../../../lib/measurements/toe"
+import { calculateCamber } from "../../../lib/measurements/camber"
 
 export const MeasurementClass = (m: any) => {
 
@@ -9,14 +11,18 @@ export const MeasurementClass = (m: any) => {
     async createMeasurement(data: any){
       const settingId = await m.save(MeasurementSetting, data);
 
-      const result = await calculateToe(data);
+      const toeResult = await calculateToe(data);
+      
+      const camberResult = await calculateCamber({FL: data.camber_front_left, RL: data.camber_rear_left, FR: data.camber_front_right, RR: data.camber_rear_right});
 
-      const resultId = await m.save(MeasurementResult, {result: result});
+      const toeId = await m.save(MeasurementToe, {result: toeResult});
+      const camberId = await m.save(MeasurementCamber, {result: camberResult});
 
       const measurement = await m.save(Measurement, {
         car: data.car_id,
         settings: settingId,
-        result: resultId
+        toe: toeId,
+        camber: camberId
       })
      
       return measurement;
@@ -24,7 +30,7 @@ export const MeasurementClass = (m: any) => {
 
     async getMeasurement(id: any){
      
-      const measurement = await m.findOne(Measurement, { relations: ["settings", "result"], where: {id}});
+      const measurement = await m.findOne(Measurement, { relations: ["settings", "toe", "camber"], where: {id}});
      
       return measurement;
     },

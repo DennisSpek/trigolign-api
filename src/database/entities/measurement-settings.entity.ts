@@ -16,7 +16,10 @@ export class MeasurementSetting {
   show_item_first!: string;
 
   @Column({ default: null })
-  camber_caster_value!: string;
+  camber_unit!: string;
+
+  @Column({ default: null })
+  toe_unit!: string;
 
   @Column({ default: null })
   wheelbase_left!: string;
