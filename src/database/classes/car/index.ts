@@ -12,11 +12,11 @@ export const CarClass = (m: any) => {
       if (car == null){
         const suspension = await m.save("Suspension", data.suspensionObject);
 
-        console.log("suspension", suspension);
+        console.log("suspension", suspension, data);
 
-        //const manufacturer = await m.save("Manufacturer", data.manufacturer);
+        const manufacturer = await m.save("Manufacturer", {name: data.manufacturer});
 
-        //console.log("manufacturer", manufacturer);
+        console.log("manufacturer", manufacturer);
 
         car = await m.save("Car", {
           model: data.model,
@@ -24,7 +24,7 @@ export const CarClass = (m: any) => {
           suspension: suspension.id,
           branch: data.branch,
           user: data.user,
-          manufacturer: data.manufacturer,
+          manufacturer: manufacturer.name,
           custom: data.custom,
           mid: data.mid
         })
