@@ -9,6 +9,9 @@ export const MeasurementClass = (m: any) => {
 
   return {
     async createMeasurement(data: any){
+
+      console.log("data", data)
+    
       const settingId = await m.save(MeasurementSetting, data);
 
       const toeResult = await calculateToe(data);

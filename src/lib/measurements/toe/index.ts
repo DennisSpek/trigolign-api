@@ -28,7 +28,7 @@ export const calculateToe = async (data: any) => {
 
   //Left Front Wheel Calculatated
   const front_left_toe = (Math.atan((front_left_toe_front - front_left_toe_back) / distance_between_rulers)) * (180 / Math.PI);
-  const y_FL = (((front_left_toe_front-front_left_toe_back)/ distance_between_rulers))*(distance_front_ruler_front_axle)
+  const y_FL = (((front_left_toe_front-front_left_toe_back)/ distance_between_rulers))*(distance_front_ruler_front_axle);
 
   const front_left_toe_average = front_left_toe_front - y_FL;
 
