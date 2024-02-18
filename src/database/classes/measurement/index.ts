@@ -9,15 +9,15 @@ export const MeasurementClass = (m: any) => {
 
   return {
     async createMeasurement(data: any){
-
-      console.log("data", data)
     
       const settingId = await m.save(MeasurementSetting, data);
 
       const toeResult = await calculateToe(data);
       
-      const camberResult = await calculateCamber({FL: data.camber_front_left, RL: data.camber_rear_left, FR: data.camber_front_right, RR: data.camber_rear_right});
+      const camberResult = await calculateCamber({FL: data.camber.camber_front_left, RL: data.camber.camber_rear_left, FR: data.camber.camber_front_right, RR: data.camber.camber_rear_right});
 
+      console.log("camberResult", camberResult, toeResult)
+      
       const toeId = await m.save(MeasurementToe, {result: toeResult});
       const camberId = await m.save(MeasurementCamber, {result: camberResult});
 
