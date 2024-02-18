@@ -5,22 +5,23 @@ interface Data {
   camber_unit: string;
   car_id: string;
   id: string; 
+  toe: any;
 }
 
 export const calculateToe = async (data: any) => {
-  const { toe_values_relative, basis_toe_measurement, show_item_first, camber_unit, car_id, id}: Data = data;
+  const { toe_values_relative, basis_toe_measurement, show_item_first, camber_unit, car_id, id, toe}: Data = data;
   const wheelbase_left: number = parseInt(data.wheelbase_left);
   const wheelbase_right: number = parseInt(data.wheelbase_right);
   const distance_x: number = parseInt(data.distance_x);
   const distance_x_y: number = parseInt(data.distance_x_y);
-  const front_left_toe_front: number = parseInt(data.toe_front_left_front);
-  const front_left_toe_back: number = parseInt(data.toe_front_left_back);
-  const front_right_toe_front: number = parseInt(data.toe_front_right_front);
-  const front_right_toe_back: number = parseInt(data.toe_front_right_back);
-  const back_left_toe_front: number = parseInt(data.toe_back_left_front);
-  const back_left_toe_back: number = parseInt(data.toe_back_left_back);
-  const back_right_toe_front: number = parseInt(data.toe_back_right_front);
-  const back_right_toe_back: number = parseInt(data.toe_back_right_back);
+  const front_left_toe_front: number = parseInt(toe.toe_front_left_front);
+  const front_left_toe_back: number = parseInt(toe.toe_front_left_back);
+  const front_right_toe_front: number = parseInt(toe.toe_front_right_front);
+  const front_right_toe_back: number = parseInt(toe.toe_front_right_back);
+  const back_left_toe_front: number = parseInt(toe.toe_back_left_front);
+  const back_left_toe_back: number = parseInt(toe.toe_back_left_back);
+  const back_right_toe_front: number = parseInt(toe.toe_back_right_front);
+  const back_right_toe_back: number = parseInt(toe.toe_back_right_back);
 
   const wheelbase_average = (wheelbase_left + wheelbase_right) / 2;
   const distance_between_rulers = distance_x_y;
