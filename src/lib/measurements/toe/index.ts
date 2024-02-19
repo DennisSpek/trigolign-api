@@ -50,7 +50,7 @@ export const calculateToe = async (data: any) => {
   const back_left_toe_average = back_left_toe_front - y_BL;
 
   //right Back Wheel Calculatated
-  const back_right_toe = (Math.atan((back_right_toe_front - back_right_toe_back) / distance_between_rulers)) * (180 / Math.PI);
+  const back_right_toe = (Math.atan(-1*((back_right_toe_front - back_right_toe_back) / distance_between_rulers))) * (180 / Math.PI);
   const y_BR = (((front_right_toe_front - front_right_toe_back) / distance_between_rulers)*((distance_front_ruler_front_axle) + wheelbase_average));
 
   const back_right_toe_average = back_right_toe_front - y_BR;
