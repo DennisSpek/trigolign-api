@@ -9,8 +9,8 @@ export const calculateCamber = ({FL, RL, FR, RR} : {FL: number, RL: number, FR: 
       rear_right: RR,      
     },
     calculated: {
-      front: FL + FR,
-      rear: RL + RR,
+      front: FL - FR,
+      rear: RL - RR,
     }
   }
 
