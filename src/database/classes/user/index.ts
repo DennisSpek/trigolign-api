@@ -1,4 +1,4 @@
-import { User } from './../../entities/user.entity'
+import { User } from '@/database/entities/user.entity';
 
 export const UserClass = (m: any) => {
   const bcrypt = require('bcrypt');
@@ -17,6 +17,17 @@ export const UserClass = (m: any) => {
 
       return null;
     },
+
+    async getById(id: string){
+      const user = await m.findOne(User, { where: { id }, relations: ["branch"] });
+
+      if (user) {
+        return user;
+      }
+
+      return null;
+    },
+
     async create(email: string, password: string){
       const user = await m.findOne(User, { where: { email }});
 

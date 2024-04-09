@@ -3,6 +3,7 @@ import { Manufacturer } from './manufacturer.entity';
 import { Measurement } from './measurement.entity';
 import { Organisation } from './organisation.entity';
 import { Branch } from './branch.entity';
+import { Session } from './session.entity';
 import { Employee } from './employee.entity';
 import { Car } from './car.entity';
 
@@ -24,6 +25,9 @@ export class User {
   @ManyToOne(() => Branch, branch => branch.users, { nullable: true })
   @JoinColumn({ name: 'branch_id' }) // Update column name and reference
   branch!: Branch | null;
+
+  @OneToMany(() => Session, session => session.id)
+  sessions!: Session[];
 
   @OneToMany(() => Car, car => car.user)
   cars!: Car[];

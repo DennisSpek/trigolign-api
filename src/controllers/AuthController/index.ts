@@ -21,17 +21,36 @@ export class AuthController {
   logIn = async (req: Request, res: Response) => {
     const { pass, email } = req.body;
 
-    //dennis
-    //test123
-
     try {
       if(pass && email){
         const user = await adapter.getUser(email, pass);
 
-        res.status(200).send(user);
+        if(user){
+          const sessionId = await adapter.createSession(user.id, req);
+
+          res.status(200).send({user, sessionId});
+        } else {
+          res.status(200).send(user);
+        }
       }
     } catch(error) {
-       res.status(500).send(error);
+      res.status(500).send(error);
     }
   }   
+
+  verifySession = async (req: Request, res: Response) => {
+    const { sessionId } = req.body;
+    
+    try {
+      const user = await adapter.getUserBySessionId(sessionId);
+
+      if(user){
+        res.status(200).send(user);
+      } else {
+        res.status(200).send({message: "session invalid"});
+      }
+    } catch(error) {
+      res.status(500).send(error);
+    }
+  }
 }

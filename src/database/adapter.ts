@@ -2,6 +2,8 @@ import { DataSource } from "typeorm"
 import * as path from 'path';
 import * as classes from "./classes";
 
+import { CarType } from '@/types/car/car';
+
 /** Global Datasource  */
 let _dataSource: any;
 
@@ -37,13 +39,69 @@ export async function getManager() {
 
 export const DatabaseAdapter = () => {
   return {
+    async createSession(userId: string, req: any){
+      const m = await getManager();
+      const session = classes.SessionClass(m);
+      
+      const sessionId = await session.createSession(userId, req.headers['user-agent']);
+
+      if(sessionId){
+        return sessionId;
+      }
+
+      return null
+    },
+
+    async getSession(id: string){
+      const m = await getManager();
+      const session = classes.SessionClass(m);
+      
+      const sessionId = await session.getSession(id);
+
+      if(sessionId){
+        return sessionId;
+      }
+
+      return null
+    },
+
     async getUser(email: string, pass: string){
       const m = await getManager();
       const User = classes.UserClass(m);
 
-      const user = await User.get(email, pass)
+      const user = await User.get(email, pass);
 
-      return user;
+      if(user){
+        return user;
+      }
+      
+      return null
+    },
+
+    async getUserBySessionId(sessionId: string){
+      const m = await getManager();
+      const Session = classes.SessionClass(m);
+
+      const user = await Session.getUserBySessionId(sessionId);
+
+      if(user){
+        return user;
+      }
+      
+      return null
+    },
+
+    async getUserById(userId: string){
+      const m = await getManager();
+      const User = classes.UserClass(m);
+
+      const user = await User.getById(userId);
+
+      if(user){
+        return user;
+      }
+      
+      return null
     },
 
     async registerUser(email: string, pass: string){
@@ -123,6 +181,14 @@ export const DatabaseAdapter = () => {
       const Car = classes.CarClass(m);
 
       const car = await Car.getCar(id)
+
+      return car;
+    },
+    async updateCar(id: string, carProperties: Partial<CarType>) {
+      const m = await getManager();
+      const Car = classes.CarClass(m);
+
+      const car = await Car.updateCar(id, carProperties)
 
       return car;
     },

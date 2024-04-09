@@ -5,6 +5,10 @@
     "sourceMap": true,
     "outDir": "build",
     "rootDir": "src/",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "target": "es6",

@@ -7,6 +7,7 @@ const autoDataRoutes = require('./autodata');
 const carRoutes = require('./car');
 const orgRoutes = require('./organisation');
 const branchRoutes = require('./branch');
+const authRoutes = require('./authentication');
 
 // Define routes
 //router.use('/autodata', autoDataRoutes);
@@ -19,6 +20,9 @@ router.use('/organisation', orgRoutes);
 
 //branch routes
 router.use('/branch', branchRoutes);
+
+//branch routes
+router.use('/authentication', authRoutes);
 
 
 // Test route

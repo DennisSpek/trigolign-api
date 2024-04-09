@@ -16,6 +16,9 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
+  "_moduleAliases": {
+    "@": "./src"
+  },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
@@ -26,6 +29,7 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "module-alias": "^2.2.3",
     "mysql2": "^3.6.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.15"

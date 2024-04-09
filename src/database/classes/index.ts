@@ -4,5 +4,6 @@ export * from './manufacturer';
 export * from './measurement';
 export * from './organisation';
 export * from './user';
+export * from './session';
 
 
