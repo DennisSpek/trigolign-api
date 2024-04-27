@@ -17,7 +17,7 @@
     "typescript": "^5.0.2"
   },
   "_moduleAliases": {
-    "@": "build"
+    "@": "./src"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",

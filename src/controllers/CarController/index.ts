@@ -38,6 +38,19 @@ export class CarController {
     }
   }
 
+  updateCar = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const body = req.body;
+
+    try {
+      const car = await adapter.updateCar(id, body);
+
+      res.status(200).send(car);
+    } catch(error) {
+      res.status(500).send({"error": error});
+    }
+  }
+
   getCar = async (req: Request, res: Response) => {
     const { id } = req.params;
 

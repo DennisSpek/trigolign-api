@@ -31,7 +31,7 @@ export class Car {
 
   @OneToOne(() => Suspension, suspension => suspension.id)
   @JoinColumn({ name: 'suspension_id' })
-  suspension!: string;
+  suspension!: Suspension;
 
   @Column({unique: true})
   registration!: string;

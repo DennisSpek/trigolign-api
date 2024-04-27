@@ -176,19 +176,20 @@ export const DatabaseAdapter = () => {
       return car;
     },
 
-    async getCar(id: string) {
-      const m = await getManager();
-      const Car = classes.CarClass(m);
-
-      const car = await Car.getCar(id)
-
-      return car;
-    },
     async updateCar(id: string, carProperties: Partial<CarType>) {
       const m = await getManager();
       const Car = classes.CarClass(m);
 
       const car = await Car.updateCar(id, carProperties)
+
+      return car;
+    },
+
+    async getCar(id: string) {
+      const m = await getManager();
+      const Car = classes.CarClass(m);
+
+      const car = await Car.getCar(id)
 
       return car;
     },

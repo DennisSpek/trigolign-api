@@ -12,6 +12,8 @@ router.get('/:vrm', carController.getDetailsByVRM);
 
 router.get('/id/:id', carController.getCar);
 
+router.put('/id/:id', carController.updateCar);
+
 router.post('/post', carController.postCar);
 
 router.post('/measurement/post', measurementController.postMeasurement)
