@@ -19,7 +19,7 @@ const register = require('./routes/register');
 
 const options = {
   key: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/privkey.pem'),
-  cert: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/cert.pem'),
+  cert: process.env.ENV != 'development' && fs.readFileSync('/etc/letsencrypt/live/api.trigolign.com/fullchain.pem'),
 };
 
 const app:Express = express();
