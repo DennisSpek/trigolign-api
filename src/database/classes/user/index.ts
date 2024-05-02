@@ -5,6 +5,7 @@ export const UserClass = (m: any) => {
 
   return {
     async get(email: string, password: string){
+      console.log("m", email);
       const user = await m.findOne(User, { where: { email }, relations: ["branch"] });
 
       if (user) {
