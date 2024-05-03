@@ -1,9 +1,9 @@
 import express, {Express, Request, Response} from 'express';
 
 import cookieParser from 'cookie-parser'
-import 'module-alias/register';
 
-import * as dotenv from 'dotenv' 
+import * as dotenv from 'dotenv'
+import 'module-alias/register';
 dotenv.config();
 
 const https = require('https');
@@ -11,7 +11,6 @@ const http = require('http')
 const path = require('path');
 
 const fs = require('fs');
-
 
 const routes = require('./routes');
 const login = require('./routes/login');

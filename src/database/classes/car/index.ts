@@ -2,7 +2,7 @@ import { Car } from "@/database/entities/car.entity";
 import { Suspension } from "@/database/entities/suspension.entity"
 import { Manufacturer } from '@/database/entities/manufacturer.entity';
 
-import { CarType } from "@/types/car/car"
+import { CarType } from '@/types/car';
 
 export const CarClass = (m: any) => {
   return {
@@ -21,7 +21,7 @@ export const CarClass = (m: any) => {
 
         console.log("manufacturer", manufacturer);
 
-        car = await m.save("Car", {
+        car = await m.save(Car, {
           model: data.carDetails.model,
           registration: data.carDetails.registration,
           suspension: suspension.id,

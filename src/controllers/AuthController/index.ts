@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { DatabaseAdapter } from '../../database/adapter';
+import { DatabaseAdapter } from '@/database/adapter';
 
 const adapter = DatabaseAdapter();
 
