@@ -45,6 +45,8 @@ export const CarClass = (m: any) => {
     async updateCar(id: string, carProperties: Partial<CarType>) {
       const car = await m.findOne(Car, { relations: ['manufacturer', 'suspension'], where: { id } });
 
+      console.log("carProperties", carProperties)
+
       if (!car) return null;
 
       // If carProperties contains manufacturer properties, load them and merge the new properties

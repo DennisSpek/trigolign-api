@@ -28,11 +28,11 @@ export class Suspension {
    * The camber values of the suspension.
    */
   @Column('json')
-  camber!: string;
+  frontaxle!: string;
 
   /**
    * The toe values of the suspension.
    */
   @Column('json')
-  toe!: string;
+  rearaxle!: string;
 }

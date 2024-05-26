@@ -33,7 +33,7 @@ export const MeasurementClass = (m: any) => {
 
     async getMeasurement(id: any){
      
-      const measurement = await m.findOne(Measurement, { relations: ["settings", "toe", "camber"], where: {id}});
+      const measurement = await m.findOne(Measurement, { relations: ["settings", "toe", "camber", "car", "car.suspension"], where: {id}});
      
       return measurement;
     },
