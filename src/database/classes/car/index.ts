@@ -7,10 +7,11 @@ import { CarType } from '@/types/car';
 export const CarClass = (m: any) => {
   return {
     async createCar(data: any){
-      console.log("data", data);
       const registration = data.carDetails.registration;
 
       let car = await m.findOne('Car', { where: { registration } });
+
+      console.log("data", data);
 
       if (car == null){
         const suspension = await m.save("Suspension", data.carSuspension);
