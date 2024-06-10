@@ -194,6 +194,15 @@ export const DatabaseAdapter = () => {
       return car;
     },
 
+    async getBranchCarByRegistration(registration: string) {
+      const m = await getManager();
+      const Car = classes.CarClass(m);
+
+      const car = await Car.getBranchCarByRegistration(registration)
+
+      return car;
+    },
+
     async getCarsByOrganisation(organisation: string) {
       const m = await getManager();
       const Car = classes.CarClass(m);

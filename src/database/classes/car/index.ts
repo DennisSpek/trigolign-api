@@ -43,6 +43,13 @@ export const CarClass = (m: any) => {
 
       return cars;
     },
+    async getBranchCarByRegistration(registration: string){
+      const cars = await m.findOne(Car, { relations: ["manufacturer", "suspension", "measurements"], where: {registration} });
+
+      if (!cars) return null;
+
+      return cars;
+    },
     async updateCar(id: string, carProperties: Partial<CarType>) {
       const car = await m.findOne(Car, { relations: ['manufacturer', 'suspension'], where: { id } });
 
