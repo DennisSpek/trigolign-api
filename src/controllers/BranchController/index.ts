@@ -51,6 +51,19 @@ export class BranchController {
     }
   }
 
+  getBranchCarByRegistration = async (req: Request, res: Response) => { 
+    //get car by registration number
+    const { id, registration } = req.params
+
+    try {
+      const car = await adapter.getBranchCarByRegistration(id, registration);
+
+      res.status(200).send(car)
+    } catch (error) {
+      res.status(500).send({message: 'Something went wrong', error});
+    }
+  }
+
   addCarToOrganisation = async (req: Request, res: Response) => {
     //add carts to org based on numberplate
   }

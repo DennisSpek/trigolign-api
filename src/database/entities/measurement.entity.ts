@@ -25,11 +25,11 @@ export class Measurement {
   @JoinColumn({ name: 'settings' }) // Change column name and reference
   settings!: MeasurementSetting;
 
-  @OneToOne(() => MeasurementToe, toe => toe.id)
+  @OneToOne(() => MeasurementToe, toe => toe.id, {nullable: true})
   @JoinColumn({ name: 'toe' }) // Change column name and reference
-  toe!: MeasurementToe;
+  toe!: MeasurementToe | null;
   
-  @OneToOne(() => MeasurementCamber, camber => camber.id)
+  @OneToOne(() => MeasurementCamber, camber => camber.id, {nullable: true})
   @JoinColumn({ name: 'camber' }) // Change column name and reference
-  camber!: MeasurementCamber;
+  camber!: MeasurementCamber | null;
 }

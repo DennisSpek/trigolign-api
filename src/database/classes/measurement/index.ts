@@ -9,17 +9,24 @@ export const MeasurementClass = (m: any) => {
 
   return {
     async createMeasurement(data: any){
-    
+      let toeId: string | null = null;
+      let camberId: string | null = null;
+
       const settingId = await m.save(MeasurementSetting, data);
 
-      const toeResult = await calculateToe(data);
-      
-      const camberResult = await calculateCamber({FL: data.camber.camber_front_left, RL: data.camber.camber_rear_left, FR: data.camber.camber_front_right, RR: data.camber.camber_rear_right});
+      if(data.toe){
+        const toeResult = await calculateToe(data);
 
-      console.log("camberResult", camberResult, toeResult)
-      
-      const toeId = await m.save(MeasurementToe, {result: toeResult});
-      const camberId = await m.save(MeasurementCamber, {result: camberResult});
+        toeId = await m.save(MeasurementToe, {result: toeResult});
+      }
+
+      if(data.camber){
+        const camberResult = await calculateCamber({FL: data.camber.camber_front_left, RL: data.camber.camber_rear_left, FR: data.camber.camber_front_right, RR: data.camber.camber_rear_right});
+
+
+
+        camberId = await m.save(MeasurementCamber, {result: camberResult});
+      }      
 
       const measurement = await m.save(Measurement, {
         car: data.car_id,

@@ -43,10 +43,10 @@ export const CarClass = (m: any) => {
 
       return cars;
     },
-    async getBranchCarByRegistration(registration: string){
-      const cars = await m.findOne(Car, { relations: ["manufacturer", "suspension", "measurements"], where: {registration} });
+    async getBranchCarByRegistration(id: string, registration: string): Promise<Car[] | []>{
+      const cars = await m.find(Car, { relations: ["manufacturer", "suspension", "measurements"], where: {registration: registration, branch: { id: id }} });
 
-      if (!cars) return null;
+      if (!cars) return [];
 
       return cars;
     },

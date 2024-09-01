@@ -10,6 +10,7 @@ router.get('/:id', branchController.getDetails);
 
 router.get('/:id/cars', branchController.getCars);
 
+router.get('/:id/cars/:registration', branchController.getBranchCarByRegistration);
 //router.put('/:id/cars/add', organisationController.addCarToOrganisation);
 
 

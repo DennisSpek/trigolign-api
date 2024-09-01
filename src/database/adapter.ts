@@ -158,7 +158,7 @@ export const DatabaseAdapter = () => {
       return details;
     },
 
-     async createBranch(name: string) {
+    async createBranch(name: string) {
       const m = await getManager();
       const Branch = classes.branch(m);
 
@@ -194,11 +194,11 @@ export const DatabaseAdapter = () => {
       return car;
     },
 
-    async getBranchCarByRegistration(registration: string) {
+    async getBranchCarByRegistration(id: string, registration: string) {
       const m = await getManager();
       const Car = classes.CarClass(m);
 
-      const car = await Car.getBranchCarByRegistration(registration)
+      const car = await Car.getBranchCarByRegistration(id, registration)
 
       return car;
     },
