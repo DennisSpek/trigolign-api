@@ -1,18 +1,21 @@
-export const calculateCamber = ({FL, RL, FR, RR} : {FL: number, RL: number, FR: number, RR: number}) => {  
+import { roundToThreeDecimals } from '@/lib/helpers/roundToThreeDecimals';
+import { handleNaN } from '@/lib/helpers/handleNaN';
+
+export const calculateCamber = ({ FL, RL, FR, RR }: { FL: number, RL: number, FR: number, RR: number }) => {
   const result = {
     front: {
-      front_left: FL,
-      front_right: FR,
+      front_left: roundToThreeDecimals(handleNaN(FL)),
+      front_right: roundToThreeDecimals(handleNaN(FR)),
     },
     back: {
-      rear_left: RL,
-      rear_right: RR,      
+      rear_left: roundToThreeDecimals(handleNaN(RL)),
+      rear_right: roundToThreeDecimals(handleNaN(RR)),
     },
     calculated: {
-      front: FL - FR,
-      rear: RL - RR,
+      front: roundToThreeDecimals(handleNaN(FL - FR)),
+      rear: roundToThreeDecimals(handleNaN(RL - RR)),
     }
-  }
+  };
 
-  return result
-}
+  return result;
+};

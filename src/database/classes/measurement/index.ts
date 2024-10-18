@@ -23,8 +23,6 @@ export const MeasurementClass = (m: any) => {
       if(data.camber){
         const camberResult = await calculateCamber({FL: data.camber.camber_front_left, RL: data.camber.camber_rear_left, FR: data.camber.camber_front_right, RR: data.camber.camber_rear_right});
 
-
-
         camberId = await m.save(MeasurementCamber, {result: camberResult});
       }      
 
