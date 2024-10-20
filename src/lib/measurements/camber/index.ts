@@ -12,8 +12,8 @@ export const calculateCamber = ({ FL, RL, FR, RR }: { FL: number, RL: number, FR
       rear_right: roundToThreeDecimals(handleNaN(RR)),
     },
     calculated: {
-      front: roundToThreeDecimals(handleNaN(FL - FR)),
-      rear: roundToThreeDecimals(handleNaN(RL - RR)),
+      front: roundToThreeDecimals(handleNaN(Math.abs(FL - FR))),
+      rear: roundToThreeDecimals(handleNaN(Math.abs(RL - RR))),
     }
   };
 
