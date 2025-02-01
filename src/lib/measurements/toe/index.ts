@@ -6,91 +6,111 @@ interface Data {
   show_item_first: string;
   camber_unit: string;
   car_id: string;
-  id: string; 
+  id: string;
   toe: any;
 }
 
 export const calculateToe = async (data: any) => {
-  const { toe_values_relative, basis_toe_measurement, show_item_first, camber_unit, car_id, id, toe }: Data = data;
-  const wheelbase_left: number = parseInt(data.wheelbase_left);
-  const wheelbase_right: number = parseInt(data.wheelbase_right);
-  const distance_x: number = parseInt(data.distance_x);
-  const distance_x_y: number = parseInt(data.distance_x_y);
-  const front_left_toe_front: number = parseInt(toe.toe_front_left_front);
-  const front_left_toe_back: number = parseInt(toe.toe_front_left_back);
-  const front_right_toe_front: number = parseInt(toe.toe_front_right_front);
-  const front_right_toe_back: number = parseInt(toe.toe_front_right_back);
-  const back_left_toe_front: number = parseInt(toe.toe_back_left_front);
-  const back_left_toe_back: number = parseInt(toe.toe_back_left_back);
-  const back_right_toe_front: number = parseInt(toe.toe_back_right_front);
-  const back_right_toe_back: number = parseInt(toe.toe_back_right_back);
+  const {
+    toe_values_relative,
+    basis_toe_measurement,
+    show_item_first,
+    camber_unit,
+    car_id,
+    id,
+    toe,
+  }: Data = data;
 
-  const wheelbase_average = (wheelbase_left + wheelbase_right) / 2;
-  const distance_between_rulers = distance_x_y;
-  const distance_front_ruler_front_axle = distance_x;
+  const W10: number = parseInt(data.wheelbase_left); //W10
+  const Z10: number = parseInt(data.wheelbase_right); //Z10
+  const AA13: number = parseInt(data.distance_x); //AA13
+  const W13: number = parseInt(data.distance_x_y); //W13
+  const V20: number = parseInt(toe.toe_front_left_front); //V20
+  const V21: number = parseInt(toe.toe_front_left_back); //V21
+  const AD20: number = parseInt(toe.toe_front_right_front); //AD20
+  const AD21: number = parseInt(toe.toe_front_right_back); //AD21
+  const V29: number = parseInt(toe.toe_back_left_front); //V29
+  const V30: number = parseInt(toe.toe_back_left_back); //V30
+  const AD29: number = parseInt(toe.toe_back_right_front); //AD29
+  const AD30: number = parseInt(toe.toe_back_right_back); //AD30
 
-  // Left Front Wheel Calculated
-  const front_left_toe = handleNaN((Math.atan((front_left_toe_front - front_left_toe_back) / distance_between_rulers)) * (180 / Math.PI));
-  const y_FL = handleNaN((((front_left_toe_front - front_left_toe_back) / distance_between_rulers)) * (distance_front_ruler_front_axle));
-  const front_left_toe_average = handleNaN(front_left_toe_front - y_FL);
+  const AC10 = (W10 + Z10) / 2; //AC10
+
+  // Left Front Wheel
+  const Y20 = handleNaN(Math.atan((V20 - V21) / W13) * (180 / Math.PI));
+  const Y22 = handleNaN(((V20 - V21) / W13) * AA13);
+  const V22 = handleNaN(V20 - Y22);
 
   // Right Front Wheel Calculated
-  const front_right_toe = handleNaN(-(Math.atan((front_right_toe_front - front_right_toe_back) / distance_between_rulers)) * (180 / Math.PI));
-  const y_FR = handleNaN(-(((front_right_toe_front - front_right_toe_back) / distance_between_rulers)) * (distance_front_ruler_front_axle));
-  const front_right_toe_average = handleNaN(front_right_toe_front + y_FR);
+  const AG20 = handleNaN(-Math.atan((AD20 - AD21) / W13) * (180 / Math.PI));
+  const AG22 = handleNaN(-((AD20 - AD21) / W13) * AA13);
+  const AD22 = handleNaN(AD20 + AG22);
 
   // Total Front Wheel Calculated
-  const total_front_wheel = handleNaN(front_right_toe_average - ((front_right_toe_average - front_left_toe_average) / 2));
-  const total_front_toe = handleNaN(front_left_toe + front_right_toe);
+  const AA23 = handleNaN(AD22 - (AD22 - V22) / 2);
+  const AA24 = handleNaN(Y20 + AG20);
 
   // Left Back Wheel Calculated
-  const back_left_toe = handleNaN((Math.atan((back_left_toe_front - back_left_toe_back) / distance_between_rulers)) * (180 / Math.PI));
-  const y_BL = handleNaN((((back_left_toe_front - back_left_toe_back) / distance_between_rulers) * ((distance_front_ruler_front_axle) + wheelbase_average)));
-  const back_left_toe_average = handleNaN(back_left_toe_front - y_BL);
+  const Y29 = handleNaN(Math.atan((V29 - V30) / W13) * (180 / Math.PI));
+  const Y31 = handleNaN(((V29 - V30) / W13) * (AA13 + AC10));
+  const V31 = handleNaN(V29 - Y31);
 
   // Right Back Wheel Calculated
-  const back_right_toe = handleNaN((Math.atan(-1 * ((back_right_toe_front - back_right_toe_back) / distance_between_rulers))) * (180 / Math.PI));
-  const y_BR = handleNaN((((front_right_toe_front - front_right_toe_back) / distance_between_rulers) * ((distance_front_ruler_front_axle) + wheelbase_average)));
-  const back_right_toe_average = handleNaN(back_right_toe_front - y_BR);
+  const AG29 = handleNaN(
+    Math.atan(-1 * ((AD29 - AD30) / W13)) * (180 / Math.PI)
+  );
+  const AG31 = handleNaN(((AD29 - AD30) / W13) * (AA13 + AC10));
+  const AD31 = handleNaN(AD29 + AG31);
 
   // Total Back Wheel Calculated
-  const total_back_wheel = handleNaN(back_right_toe_average - ((back_right_toe_average - back_left_toe_average) / 2));
-  const total_back_toe = handleNaN(back_left_toe + back_right_toe);
-  const thrustangle = handleNaN((back_left_toe - back_right_toe) / 2);
+  const AA32 = handleNaN(AD31 - (AD31 - V31) / 2);
+  const AA33 = handleNaN(Y29 + AG29);
+  const AA35 = handleNaN((Y29 - AG29) / 2);
+
+  const AA18 = handleNaN((AD20 - V20) / 2 + V20);
+  const AA19 = handleNaN((AD21 - V21) / 2 + V21);
+  const AA20 = handleNaN(((AA19 - AA18) / W13) * AA13 + AA18);
+  const AA27 = handleNaN((AD29 - V29) / 2 + V29);
+  const AA28 = handleNaN((AD30 - V30) / 2 + V30);
+  const AA29 = handleNaN(((AA28 - AA27) / W13) * (AA13 + AC10) + AA27);
+
+  const V47 = AA20;
+  const V48 = AA29;
+  const Z46 = handleNaN((Math.atan((V47 - V48) / AC10) * 180) / Math.PI);
 
   return {
     front: {
       left: {
-        front_left_toe: roundToThreeDecimals(front_left_toe),
-        y_FL: roundToThreeDecimals(y_FL),
-        front_left_toe_average: roundToThreeDecimals(front_left_toe_average)
+        front_left_toe: roundToThreeDecimals(Y20),
+        y_FL: roundToThreeDecimals(Y22),
+        front_left_toe_average: roundToThreeDecimals(V22),
       },
       right: {
-        front_right_toe: roundToThreeDecimals(front_right_toe),
-        y_FR: roundToThreeDecimals(y_FR),
-        front_right_toe_average: roundToThreeDecimals(front_right_toe_average)
+        front_right_toe: roundToThreeDecimals(AG20),
+        y_FR: roundToThreeDecimals(AG22),
+        front_right_toe_average: roundToThreeDecimals(AD22),
       },
       average: {
-        total_front_wheel: roundToThreeDecimals(total_front_wheel),
-        total_front_toe: roundToThreeDecimals(total_front_toe)
-      }
+        total_front_wheel: roundToThreeDecimals(AA23),
+        total_front_toe: roundToThreeDecimals(AA24),
+      },
     },
     back: {
       left: {
-        back_left_toe: roundToThreeDecimals(back_left_toe),
-        y_BL: roundToThreeDecimals(y_BL),
-        back_left_toe_average: roundToThreeDecimals(back_left_toe_average)
+        back_left_toe: roundToThreeDecimals(Y29),
+        y_BL: roundToThreeDecimals(Y31),
+        back_left_toe_average: roundToThreeDecimals(V31),
       },
       right: {
-        back_right_toe: roundToThreeDecimals(back_right_toe),
-        y_BR: roundToThreeDecimals(y_BR),
-        back_right_toe_average: roundToThreeDecimals(back_right_toe_average)
+        back_right_toe: roundToThreeDecimals(AG29),
+        y_BR: roundToThreeDecimals(AG31),
+        back_right_toe_average: roundToThreeDecimals(AD31),
       },
       average: {
-        total_back_wheel: roundToThreeDecimals(total_back_wheel),
-        total_back_toe: roundToThreeDecimals(total_back_toe),
-        thrustangle: roundToThreeDecimals(thrustangle)
-      }
-    }
+        total_back_wheel: roundToThreeDecimals(AA32),
+        total_back_toe: roundToThreeDecimals(AA33),
+        thrustangle: roundToThreeDecimals(AA35),
+      },
+    },
   };
-}
+};

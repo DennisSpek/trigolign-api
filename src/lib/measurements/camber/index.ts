@@ -1,7 +1,7 @@
 import { roundToThreeDecimals } from '@/lib/helpers/roundToThreeDecimals';
 import { handleNaN } from '@/lib/helpers/handleNaN';
 
-export const calculateCamber = ({ FL, RL, FR, RR }: { FL: number, RL: number, FR: number, RR: number }) => {
+export const calculateCamber = ({ FL, RL, FR, RR }: { FL: number, RL: number, FR: number, RR: number }) => {  
   const result = {
     front: {
       front_left: roundToThreeDecimals(handleNaN(FL)),
