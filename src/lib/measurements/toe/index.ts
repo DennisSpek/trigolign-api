@@ -79,9 +79,10 @@ export const calculateToe = async (data: any) => {
   const Z46 = handleNaN((Math.atan((V47 - V48) / AC10) * 180) / Math.PI);
 
   const AD40 = handleNaN(Y20 - Z46);
-  const AH40 = handleNaN(AD40 - AF40);
 
   const AF40 = handleNaN(AG20 + Z46);
+
+  const AH40 = handleNaN(AD40 - AF40);
 
   const AD41 = handleNaN(Y29 - Z46);
 
