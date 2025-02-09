@@ -78,38 +78,49 @@ export const calculateToe = async (data: any) => {
   const V48 = AA29;
   const Z46 = handleNaN((Math.atan((V47 - V48) / AC10) * 180) / Math.PI);
 
+  const AD40 = handleNaN(Y20 - Z46);
+  const AH40 = handleNaN(AD40 - AF40);
+
+  const AF40 = handleNaN(AG20 + Z46);
+
+  const AD41 = handleNaN(Y29 - Z46);
+
+  const AF41 = handleNaN(AG29 + Z46);
+
+  const AH42 = handleNaN((AD41 - AF41) / 2);
+
   return {
     front: {
       left: {
-        front_left_toe: roundToThreeDecimals(Y20),
-        y_FL: roundToThreeDecimals(Y22),
-        front_left_toe_average: roundToThreeDecimals(V22),
+        front_left_toe: roundToThreeDecimals(AD40),
+        y_FL: roundToThreeDecimals(0),
+        front_left_toe_average: roundToThreeDecimals(0),
       },
       right: {
-        front_right_toe: roundToThreeDecimals(AG20),
-        y_FR: roundToThreeDecimals(AG22),
-        front_right_toe_average: roundToThreeDecimals(AD22),
+        front_right_toe: roundToThreeDecimals(AF40),
+        y_FR: roundToThreeDecimals(0),
+        front_right_toe_average: roundToThreeDecimals(0),
       },
       average: {
-        total_front_wheel: roundToThreeDecimals(AA23),
-        total_front_toe: roundToThreeDecimals(AA24),
+        total_front_wheel: roundToThreeDecimals(0),
+        total_front_toe: roundToThreeDecimals(AD40 + AF40),
       },
     },
     back: {
       left: {
-        back_left_toe: roundToThreeDecimals(Y29),
-        y_BL: roundToThreeDecimals(Y31),
-        back_left_toe_average: roundToThreeDecimals(V31),
+        back_left_toe: roundToThreeDecimals(AD41),
+        y_BL: roundToThreeDecimals(0),
+        back_left_toe_average: roundToThreeDecimals(0),
       },
       right: {
-        back_right_toe: roundToThreeDecimals(AG29),
-        y_BR: roundToThreeDecimals(AG31),
-        back_right_toe_average: roundToThreeDecimals(AD31),
+        back_right_toe: roundToThreeDecimals(AF41),
+        y_BR: roundToThreeDecimals(0),
+        back_right_toe_average: roundToThreeDecimals(0),
       },
       average: {
-        total_back_wheel: roundToThreeDecimals(AA32),
-        total_back_toe: roundToThreeDecimals(AA33),
-        thrustangle: roundToThreeDecimals(AA35),
+        total_back_wheel: roundToThreeDecimals(0),
+        total_back_toe: roundToThreeDecimals(AD41 + AF41),
+        thrustangle: roundToThreeDecimals(AH42),
       },
     },
   };
