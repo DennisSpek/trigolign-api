@@ -76,6 +76,7 @@ export const CarClass = (m: any) => {
       // If carProperties contains suspension properties, load them and merge the new properties
       if (carProperties.suspension) {
         const newSuspension = carProperties.suspension;
+        console.log("newSuspension", newSuspension);
         let suspension = await m.findOne(Suspension, {where: { id: car.suspension.id }});
 
         if (suspension) {

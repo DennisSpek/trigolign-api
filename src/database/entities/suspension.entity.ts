@@ -35,4 +35,22 @@ export class Suspension {
    */
   @Column('json')
   rearaxle!: string;
+
+  /**
+   * The unit used for toe measurements (mm or decimal degrees)
+   */
+  @Column({ default: '0,00°' })
+  toe_unit!: string;
+
+  /**
+   * Conversion factor for front rim (in mm)
+   */
+  @Column({ type: 'float', default: 0 })
+  conversion_factor_front!: number;
+
+  /**
+   * Conversion factor for rear rim (in mm)
+   */
+  @Column({ type: 'float', default: 0 })
+  conversion_factor_rear!: number;
 }
