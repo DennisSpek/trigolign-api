@@ -1,5 +1,6 @@
 import { roundToThreeDecimals } from '@/lib/helpers/roundToThreeDecimals';
 import { handleNaN } from '@/lib/helpers/handleNaN';
+
 interface Data {
   toe_values_relative: string;
   basis_toe_measurement: string;
@@ -12,12 +13,6 @@ interface Data {
 
 export const calculateToe = async (data: any) => {
   const {
-    toe_values_relative,
-    basis_toe_measurement,
-    show_item_first,
-    camber_unit,
-    car_id,
-    id,
     toe,
   }: Data = data;
 

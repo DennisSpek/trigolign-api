@@ -2,7 +2,8 @@ import { MeasurementSetting } from "../../entities/measurement-settings.entity";
 import { MeasurementToe } from '../../entities/measurement-toe.entity';
 import { MeasurementCamber } from '../../entities/measurement-camber.entity';
 import { Measurement } from "../../entities/measurement.entity"
-import { calculateToe } from "../../../lib/measurements/toe"
+import { calculateToe as calculateToeDecimalDegrees } from "../../../lib/measurements/toe/decimalDegrees"
+
 import { calculateCamber } from "../../../lib/measurements/camber"
 
 export const MeasurementClass = (m: any) => {
@@ -12,10 +13,10 @@ export const MeasurementClass = (m: any) => {
       let toeId: string | null = null;
       let camberId: string | null = null;
 
-      const settingId = await m.save(MeasurementSetting, data);
+      const settingId = await m.save(MeasurementSetting, data.settings);
 
       if(data.toe){
-        const toeResult = await calculateToe(data);
+        const toeResult = await calculateToeDecimalDegrees(data);
 
         toeId = await m.save(MeasurementToe, {result: toeResult});
       }
@@ -24,7 +25,7 @@ export const MeasurementClass = (m: any) => {
         const camberResult = await calculateCamber({FL: data.camber.camber_front_left, RL: data.camber.camber_rear_left, FR: data.camber.camber_front_right, RR: data.camber.camber_rear_right});
 
         camberId = await m.save(MeasurementCamber, {result: camberResult});
-      }      
+      }
 
       const measurement = await m.save(Measurement, {
         car: data.car_id,

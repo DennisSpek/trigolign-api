@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { DatabaseAdapter } from '../../database/adapter';
-import { calculateToe } from '../../lib/measurements/toe'
 
 const adapter = DatabaseAdapter();
 
