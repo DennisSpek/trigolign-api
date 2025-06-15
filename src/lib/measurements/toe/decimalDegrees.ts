@@ -16,10 +16,12 @@ export const calculateToe = async (data: any) => {
     toe,
   }: Data = data;
 
-  const W10: number = parseInt(data.wheelbase_left); //W10
-  const Z10: number = parseInt(data.wheelbase_right); //Z10
-  const AA13: number = parseInt(data.distance_x); //AA13
-  const W13: number = parseInt(data.distance_x_y); //W13
+  const {wheelbase_left, wheelbase_right, distance_x, distance_x_y} = data.settings
+
+  const W10: number = parseInt(wheelbase_left); //W10
+  const Z10: number = parseInt(wheelbase_right); //Z10
+  const AA13: number = parseInt(distance_x); //AA13
+  const W13: number = parseInt(distance_x_y); //W13
   const V20: number = parseInt(toe.toe_front_left_front); //V20
   const V21: number = parseInt(toe.toe_front_left_back); //V21
   const AD20: number = parseInt(toe.toe_front_right_front); //AD20
